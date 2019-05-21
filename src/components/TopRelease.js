@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { websitesIcons } from '../js/websitesIcons'
 
 class TopRelease extends Component {
 
@@ -7,72 +8,35 @@ class TopRelease extends Component {
     }
 
     render() {
-        const { cover, name, screenshots, release_dates } = this.state.data;
-        const background = {
-            backgroundImage: "url('//images.igdb.com/igdb/image/upload/t_720p/" + screenshots[0].image_id + ".jpg')"
-        };
+        const { cover, name, screenshots, release_dates, involved_companies, websites } = this.state.data;
+        const backgroundUrl = '//images.igdb.com/igdb/image/upload/t_1080p/' + screenshots[0].image_id + '.jpg';
+        const coverUrl = `//images.igdb.com/igdb/image/upload/t_cover_big/${cover.image_id}.jpg`;
+        const releaseDate = release_dates[0].human;
         return (
             <>
                 {this.state.data === null ? "loading" :
                     <section
                         className="section top-release"
-                        style={background}>
+                        style={{ backgroundImage: `url(${backgroundUrl})` }}>
                         <div className="cover">
-                            <img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${cover.image_id}.jpg`} alt="" className="game-cover" />
+                            <img src={coverUrl} alt="" className="game-cover" />
                         </div>
                         <div className="header-informations">
                             <div className="informations-row">
                                 <div className="name-and-rating">
                                     <h1 className="game-name">{name}</h1>
-                                    <p>{release_dates[0].human}</p>
+                                    <p className="release-date">{releaseDate}</p>
                                 </div>
                                 <ul className="social-links">
-                                    <li className="social-link">
-                                        <a href="#">
-                                            <img className="social-link__icon"
-                                                src="https://cdn3.iconfinder.com/data/icons/2018-social-media-logotypes/1000/2018_social_media_popular_app_logo_twitter-128.png"
-                                                alt="tweeter" />
-                                        </a>
-                                    </li>
-                                    <li className="social-link">
-                                        <a href="#">
-                                            <img className="social-link__icon"
-                                                src="https://cdn3.iconfinder.com/data/icons/2018-social-media-logotypes/1000/2018_social_media_popular_app_logo_youtube-128.png"
-                                                alt="tweeter" />
-                                        </a>
-                                    </li>
-                                    <li className="social-link">
-                                        <a href="#">
-                                            <img className="social-link__icon"
-                                                src="https://cdn3.iconfinder.com/data/icons/2018-social-media-logotypes/1000/2018_social_media_popular_app_logo_youtube-128.png"
-                                                alt="tweeter" />
-                                        </a>
-                                    </li>
-                                    <li className="social-link">
-                                        <a href="#">
-                                            <img className="social-link__icon"
-                                                src="https://cdn3.iconfinder.com/data/icons/2018-social-media-logotypes/1000/2018_social_media_popular_app_logo_youtube-128.png"
-                                                alt="tweeter" />
-                                        </a>
-                                    </li>
-                                    <li className="social-link">
-                                        <a href="#">
-                                            <img className="social-link__icon"
-                                                src="https://cdn3.iconfinder.com/data/icons/2018-social-media-logotypes/1000/2018_social_media_popular_app_logo_youtube-128.png"
-                                                alt="tweeter" />
-                                        </a>
-                                    </li>
-                                    <li className="social-link">
-                                        <a href="#">
-                                            <img className="social-link__icon"
-                                                src="https://cdn3.iconfinder.com/data/icons/2018-social-media-logotypes/1000/2018_social_media_popular_app_logo_youtube-128.png"
-                                                alt="tweeter" />
-                                        </a>
-                                    </li>
+                                    {websites.map((link, index) => (
+                                        <li key={index} className="social-link">
+                                            {websitesIcons(link.category, link.url)}
+                                        </li>
+                                    ))}
                                 </ul>
                             </div>
                             <div className="creating">
-                                <p>Creating by <b>Riot Games</b> and published by <b>EA Games</b></p>
+                                <p>Creating by <b>{involved_companies[0].company.name}</b></p>
                             </div>
                         </div>
                     </section>

@@ -89,7 +89,9 @@ body {
   color: black;
   margin-right: 30px;
 }
-
+.release-date{
+  font-size: 20px;
+}
 .name-and-rating {
   display: flex;
   justify-content: left;
@@ -105,31 +107,9 @@ body {
   margin-right: 10px;
 }
 
-.social-link__icon {
+.social-icon {
   width: 35px;
 }
-
-.rating {
-  display: flex;
-  margin: 0 10px 0 4px;
-}
-
-.rating-star {
-  padding: 2px;
-  display: flex;
-  align-items: center;
-}
-
-.rating__icon {
-  font-size: 16px;
-  color: rgb(0, 193, 201);
-}
-
-.rating-count {
-  color: rgb(0, 193, 201);
-  font-size: 16px;
-}
-
 .creating {
   color: black;
 }
@@ -152,9 +132,6 @@ body {
     margin: 7px 0;
   }
 
-  .rating {
-    margin: 0 10px 0 0px;
-  }
 }
 
 @media screen and (max-width: 600px) {

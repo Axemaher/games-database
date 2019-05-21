@@ -23,7 +23,7 @@ class Home extends Component {
             },
 
             data: `limit 10;
-            fields *, screenshots.*, cover.*, release_dates.*;
+            fields *, screenshots.*, cover.*, release_dates.*, websites.*, involved_companies.company.*;
             where popularity > 80 & first_release_date > ${dateNow};
             sort popularity desc;`
         })
