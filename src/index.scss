@@ -28,12 +28,18 @@ body {
   flex-direction: column;
 }
 
-
 .section {
   display: flex;
   justify-content: center;
+  .seciton-title{
+    padding-top: 30px;
+  } 
 }
-
+@media screen and (max-width: 1200px) {
+  .seciton-title{
+    padding: 30px 0 0 20px;
+  } 
+}
 .header {
   width: 1400px;
   .nav-group{
@@ -172,5 +178,35 @@ body {
 @media screen and (max-width: 600px) {
   .game-cover {
     width: 120px;
+  }
+}
+
+.section-carousel{
+  width: 1200px;
+  flex-direction: column;
+  margin: 0 auto; 
+}
+@media screen and (max-width: 1200px) {
+  .section-carousel {
+    width: 100%;
+  }
+}
+.releasing-item{
+  width: 130px;
+  height: 130px;
+  margin: 10px auto 80px auto;
+  list-style: none;
+  text-align: center;
+  .releasing-item-href{
+    text-decoration: none;
+    color: $primary-font;
+  }
+  .releasing-item__image{
+    height: 100%;
+    background-size: cover;
+    background-position-x: center;
+  }
+  .releasing-item__name{
+    padding-top: 6px;
   }
 }

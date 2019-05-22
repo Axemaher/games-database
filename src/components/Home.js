@@ -12,8 +12,6 @@ class Home extends Component {
     }
     componentDidMount() {
         let dateNow = Math.round((new Date()).getTime() / 1000);
-
-        console.log(dateNow)
         axios({
             url: `${proxyUrl}${targetUrl}`,
             method: 'POST',
@@ -22,9 +20,9 @@ class Home extends Component {
                 'user-key': API_KEY,
             },
 
-            data: `limit 10;
+            data: `limit 16;
             fields *, screenshots.*, cover.*, release_dates.*, websites.*, involved_companies.company.*;
-            where popularity > 80 & first_release_date > ${dateNow};
+            where popularity > 50 & first_release_date > ${dateNow} & screenshots > 0;
             sort popularity desc;`
         })
             .then(response => {
@@ -38,7 +36,7 @@ class Home extends Component {
     render() {
         return (
             <main className="main">
-                {this.state.data.length > 5 ? <TopRelease data={this.state.data} /> : "null"}
+                {this.state.data.length > 5 ? <TopRelease data={this.state.data} /> : "loading"}
             </main>
         );
     }
