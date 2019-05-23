@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TopRelease from './TopRelease';
-import axios from 'axios'
+import Popular from './Popular';
+import axios from 'axios';
 
 const API_KEY = '5fccca9c9526e977331af051c184e3cd';
 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
@@ -8,7 +9,8 @@ const targetUrl = 'https://api-v3.igdb.com/games';
 
 class Home extends Component {
     state = {
-        data: []
+        dataTopRelease: [],
+        dataPopularity: []
     }
     componentDidMount() {
         let dateNow = Math.round((new Date()).getTime() / 1000);
@@ -21,13 +23,33 @@ class Home extends Component {
             },
 
             data: `limit 16;
-            fields *, screenshots.*, cover.*, release_dates.*, websites.*, involved_companies.company.*;
+            fields cover.*, name, screenshots.*, release_dates.human, websites.*, involved_companies.company.name, themes.name;
             where popularity > 50 & first_release_date > ${dateNow} & screenshots > 0;
             sort popularity desc;`
         })
             .then(response => {
                 console.log(response.data);
-                this.setState({ data: response.data })
+                this.setState({ dataTopRelease: response.data })
+            })
+            .catch(err => {
+                console.error(err);
+            });
+        axios({
+            url: `${proxyUrl}${targetUrl}`,
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'user-key': API_KEY,
+            },
+
+            data: `limit 8;
+                fields id, name, screenshots.*, summary, release_dates.human, involved_companies.company.*, themes.*;
+                where popularity > 100 & screenshots > 0 & release_dates != null & themes != 42;
+                sort popularity desc;`
+        })
+            .then(response => {
+                console.log(response.data);
+                this.setState({ dataPopularity: response.data })
             })
             .catch(err => {
                 console.error(err);
@@ -36,7 +58,13 @@ class Home extends Component {
     render() {
         return (
             <main className="main">
-                {this.state.data.length > 5 ? <TopRelease data={this.state.data} /> : "loading"}
+                {this.state.dataTopRelease.length > 5 ?
+                    <>
+                        <TopRelease data={this.state.dataTopRelease} />
+                        <Popular data={this.state.dataPopularity} />
+                    </>
+
+                    : "loading"}
             </main>
         );
     }
