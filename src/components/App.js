@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Home from './Home';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Game from "./Game";
 
 const App = () => {
   return (
@@ -24,6 +25,8 @@ const App = () => {
         </header>
 
         <Route path="/" exact component={Home} />
+        <Route path="/game/:id" component={Game} />
+
       </>
     </Router>
   );

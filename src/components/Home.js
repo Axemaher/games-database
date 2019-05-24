@@ -4,10 +4,6 @@ import Popular from './Popular';
 import axios from 'axios';
 import { url, method, headers, topReleases, popular } from '../js/api';
 
-const API_KEY = '5fccca9c9526e977331af051c184e3cd';
-const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-const targetUrl = 'https://api-v3.igdb.com/games';
-
 class Home extends Component {
     state = {
         dataTopRelease: [],
