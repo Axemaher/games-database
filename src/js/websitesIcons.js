@@ -1,5 +1,4 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import developer from '../images/developer-ico.png';
 import wikipedia from '../images/wikipedia-ico.png';
 import facebook from '../images/facebook-ico.png';

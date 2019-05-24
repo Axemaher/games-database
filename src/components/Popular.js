@@ -14,7 +14,7 @@ const Popular = props => {
     )
     return (
         <section className="section section-popular">
-            <h2 className="seciton-title">Popular</h2>
+            <h2 className="section-title">Popular</h2>
             <div className="popular">
                 <ul className="popular__list">
                     {items}

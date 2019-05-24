@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { websitesIcons } from '../js/websitesIcons';
 import AliceCarousel from 'react-alice-carousel';
 import "react-alice-carousel/lib/alice-carousel.css"
+import SocialLinks from './SocialLinks';
 
 
 
@@ -18,13 +18,13 @@ class TopRelease extends Component {
             </div>
         ))
     }
+
     responsive = {
         0: { items: 2 },
         500: { items: 3 },
         900: { items: 4 },
         1024: { items: 6 },
-    }
-
+    };
     render() {
         const { cover, name, screenshots, release_dates, involved_companies, websites } = this.state.data;
         const backgroundUrl = '//images.igdb.com/igdb/image/upload/t_1080p/' + screenshots[Math.floor((Math.random() * screenshots.length) + 0)].image_id + '.jpg';
@@ -44,13 +44,7 @@ class TopRelease extends Component {
                                 <h1 className="game-name">{name}</h1>
                                 <p className="release-date">{releaseDate}</p>
                             </div>
-                            <ul className="social-links">
-                                {websites.map((link, index) => (
-                                    <li key={index} className="social-link">
-                                        {websitesIcons(link.category, link.url)}
-                                    </li>
-                                ))}
-                            </ul>
+                            <SocialLinks data={websites} />
                         </div>
                         <div className="creating">
                             <p>Creating by <b>{involved_companies[0].company.name}</b></p>
@@ -58,7 +52,7 @@ class TopRelease extends Component {
                     </div>
                 </section>
                 <section className="section section-carousel">
-                    <h2 className="seciton-title">Coming Soon</h2>
+                    <h2 className="section-title">Coming Soon</h2>
                     <AliceCarousel
                         items={this.state.slidesData}
                         responsive={this.responsive}
