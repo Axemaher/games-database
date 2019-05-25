@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import TopRelease from './TopRelease';
+import GameHeader from './GameHeader';
 import CardGrid from './CardGrid';
+import Carousel from "./Carousel";
 import axios from 'axios';
 import { url, method, headers, topReleases, popular } from '../js/api';
 
@@ -28,12 +29,14 @@ class Home extends Component {
             .catch(err => console.error(err));
     }
     render() {
+        const { dataTopRelease, dataPopularity } = this.state;
         return (
             <main className="main">
-                {this.state.dataTopRelease.length > 5 ?
+                {dataTopRelease.length > 5 ?
                     <>
-                        <TopRelease data={this.state.dataTopRelease} />
-                        <CardGrid data={this.state.dataPopularity} sectionTitle="Popular" />
+                        <GameHeader data={dataTopRelease[Math.floor((Math.random() * dataTopRelease.length) + 0)]} gameNameBefore={true} />
+                        <Carousel data={dataTopRelease} sectionTitle="Coming soon" />
+                        <CardGrid data={dataPopularity} sectionTitle="Popular" />
                     </>
 
                     : "loading"}

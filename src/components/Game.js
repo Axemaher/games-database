@@ -1,8 +1,39 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import GameHeader from './GameHeader'
 
-const Game = props => {
-    console.log(props.match.params.id)
-    return (<h1>game {<p> id: {props.match.params.id}</p>}</h1>);
+import { url, method, headers, gameById } from '../js/api';
+
+const Game = ({ match }) => {
+
+    const [data, setdata] = useState(null);
+
+
+    useEffect(() => {
+        axios({
+            url, method, headers, data: `${gameById}; where id = ${match.params.id};`
+        })
+            .then(response => {
+                setdata(response.data)
+            })
+            .catch(err => console.error(err));
+    }, [])
+
+    console.log(match.params.id)
+    console.log(data)
+
+    return (
+        <>
+            {data === null ?
+                <p>loading</p> :
+                <>
+                    <main className="main">
+                        <GameHeader data={data[0]} />
+                    </main>
+                </>
+            }
+        </>
+    );
 }
 
 export default Game;

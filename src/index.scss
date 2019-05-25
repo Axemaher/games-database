@@ -65,7 +65,7 @@ body {
 }
 
 
-.top-release {
+.game-header {
   margin-bottom: 20px;
   height: 400px;
   background-image: url('http://cdn.benchmark.pl/uploads/article/70560/GALLERYINCONTENT/2cc653bf255817f9ff49a07b8da9cae2412938f3.jpg');
@@ -95,6 +95,8 @@ body {
   color: black;
   margin-right: 30px;
   position: relative;
+}
+.game-name-before{
   &::before{
     content: "This week";
     position: absolute;
@@ -152,7 +154,6 @@ body {
     width: 100%;
     padding-left: 5px;
   }
-
   .game-name {
     font-size: 30px;
   }
@@ -189,6 +190,34 @@ body {
     width: 120px;
   }
 }
+
+.rating {
+  display: flex;
+  margin: 0 10px 0 4px;
+  .rating-count {
+    color: rgb(0, 193, 201);
+    font-size: 16px;
+  }
+}
+
+.rating-star {
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  .rating__icon {
+    font-size: 16px;
+    color: rgb(0, 193, 201);
+  }
+}
+
+
+
+
+
+
+
+
+
 
 .section-carousel{
   width: 1200px;
