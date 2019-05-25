@@ -244,8 +244,28 @@ body {
   margin: 0 auto 20px auto;
 }
 .popular-item__description{
-  max-height: 96px;
   overflow: hidden;
+  position: relative; 
+  line-height: 1.2em;
+  max-height: 4.8em; 
+  text-align: justify;
+  margin-right: -1em;
+  padding-right: 1em;
+  &:before {
+    content: '...';
+    position: absolute;
+    right: 6px;
+    bottom: 0;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.2em;
+    background: white;
+  }
 }
 @media screen and (max-width: 600px) {
   .popular-item{

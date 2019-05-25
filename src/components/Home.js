@@ -14,7 +14,7 @@ class Home extends Component {
             url, method, headers, data: topReleases
         })
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 this.setState({ dataTopRelease: response.data })
             })
             .catch(err => console.error(err));
@@ -22,7 +22,7 @@ class Home extends Component {
             url, method, headers, data: popular
         })
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 this.setState({ dataPopularity: response.data })
             })
             .catch(err => console.error(err));
