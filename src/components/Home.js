@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TopRelease from './TopRelease';
-import Popular from './Popular';
+import CardGrid from './CardGrid';
 import axios from 'axios';
 import { url, method, headers, topReleases, popular } from '../js/api';
 
@@ -33,7 +33,7 @@ class Home extends Component {
                 {this.state.dataTopRelease.length > 5 ?
                     <>
                         <TopRelease data={this.state.dataTopRelease} />
-                        <Popular data={this.state.dataPopularity} />
+                        <CardGrid data={this.state.dataPopularity} sectionTitle="Popular" />
                     </>
 
                     : "loading"}

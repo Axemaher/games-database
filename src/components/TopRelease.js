@@ -35,7 +35,7 @@ const TopRelease = props => {
                     </div>
                 </div>
             </section>
-            <Carousel data={props.data} />
+            <Carousel data={props.data} sectionTitle="Coming soon" />
         </>
     )
 

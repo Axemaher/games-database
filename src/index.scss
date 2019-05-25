@@ -200,50 +200,50 @@ body {
     width: 100%;
   }
 }
-.releasing-item{
+.carousel-item{
   width: 130px;
   height: 130px;
   margin: 10px auto 80px auto;
   list-style: none;
   text-align: center;
-  .releasing-item-href{
+  .carousel-item-href{
     text-decoration: none;
     color: $primary-font;
   }
-  .releasing-item__image{
+  .carousel-item__image{
     height: 100%;
     background-size: cover;
     background-position-x: center;
   }
-  .releasing-item__name{
+  .carousel-item__name{
     padding-top: 6px;
   }
 }
 
 
 
-.section-popular{
+.section-card-grid{
   width: 1200px;
   flex-direction: column;
   margin: 0 auto; 
 }
 @media screen and (max-width: 1200px) {
-  .section-popular {
+  .section-card-grid {
     width: 100%;
   }
 }
-.popular__list{
+.card-grid__list{
   display: flex;
   flex-wrap: wrap;
   list-style: none;
 }
-.popular-item{
+.card-grid-item{
   width: 288px;
   height: auto;
   padding: 5px;
   margin: 0 auto 20px auto;
 }
-.popular-item__description{
+.card-grid-item__description{
   overflow: hidden;
   position: relative; 
   line-height: 1.2em;
@@ -268,23 +268,23 @@ body {
   }
 }
 @media screen and (max-width: 600px) {
-  .popular-item{
+  .card-grid-item{
     width: 100%;
   }
 }
-.popular-item__image{
+.card-grid-item__image{
   width: 100%;
   height: 162px;
   background-size: cover;
   background-position: center;
 }
-.popular-item__name{
+.card-grid-item__name{
   font-weight: bold;
   margin: 4px 0 10px 0;
   text-decoration: none;
   color: $primary-font;
 }
-.popular-item__game-info{
+.card-grid-item__game-info{
   display: flex;
   justify-content: space-between;
   margin: 6px 0;

@@ -3,13 +3,13 @@ import AliceCarousel from 'react-alice-carousel';
 import "react-alice-carousel/lib/alice-carousel.css"
 import { BrowserRouter as Link } from "react-router-dom";
 
-const Carousel = props => {
+const Carousel = ({ data, sectionTitle }) => {
 
-    const slidesData = props.data.map((item, i) => (
-        <div key={i} className="releasing-item">
-            <Link to={`/game/${item.id}`} className="releasing-item-href">
-                <div className="releasing-item__image" style={{ backgroundImage: `url(//images.igdb.com/igdb/image/upload/t_cover_big/${item.cover.image_id}.jpg)` }}></div>
-                <p className="releasing-item__name">{item.name}</p>
+    const slidesData = data.map((item, i) => (
+        <div key={i} className="carousel-item">
+            <Link to={`/game/${item.id}`} className="carousel-item-href">
+                <div className="carousel-item__image" style={{ backgroundImage: `url(//images.igdb.com/igdb/image/upload/t_cover_big/${item.cover.image_id}.jpg)` }}></div>
+                <p className="carousel-item__name">{item.name}</p>
             </Link>
         </div>
     ));
@@ -26,7 +26,7 @@ const Carousel = props => {
 
     return (
         <section className="section section-carousel">
-            <h2 className="section-title">Coming Soon</h2>
+            <h2 className="section-title">{sectionTitle}</h2>
             <AliceCarousel
                 items={slidesData}
                 responsive={responsive}
