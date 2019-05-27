@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import GameHeader from '../GameHeader/GameHeader'
+import GameHeader from '../GameHeader/GameHeader';
+import Gallery from '../Gallery/Gallery';
 
 import { url, method, headers, gameById } from '../../js/api';
 
@@ -19,7 +20,6 @@ const Game = ({ match }) => {
             .catch(err => console.error(err));
     }, [])
 
-    console.log(match.params.id)
     console.log(data)
 
     return (
@@ -29,6 +29,7 @@ const Game = ({ match }) => {
                 <>
                     <main className="main">
                         <GameHeader data={data[0]} />
+                        <Gallery data={data[0].screenshots} />
                     </main>
                 </>
             }

@@ -1,0 +1,27 @@
+.section-gallery{
+    width: 1200px;
+    flex-direction: column;
+    margin: 0 auto; 
+  }
+  .gallery-items-list{
+    display: grid;
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    list-style: none;
+  }
+  .gallery-item{
+    width: 100%;
+    transition: all .3s;
+    &:hover{
+        opacity: .8;
+        cursor: pointer;
+    }
+  }
+
+@media screen and (max-width: 1200px) {
+    .section-gallery {
+        width: 100%;
+        padding: 0 10px;
+    }
+}
