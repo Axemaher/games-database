@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Home from './Home';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Game from "./Game";
+import './App.scss';
+import Home from '../Home/Home';
+import Game from "../Game/Game";
 
 const App = () => {
   return (

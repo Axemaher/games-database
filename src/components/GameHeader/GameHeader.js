@@ -1,6 +1,7 @@
 import React from 'react'
-import SocialLinks from './SocialLinks';
-import RatingStars from './RatingStars';
+import SocialLinks from '../SocialLinks/SocialLinks';
+import RatingStars from '../RatingStars/RatingStars';
+import './GameHeader.scss';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 

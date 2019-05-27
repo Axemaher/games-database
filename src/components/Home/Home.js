@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import GameHeader from './GameHeader';
-import CardGrid from './CardGrid';
-import Carousel from "./Carousel";
+import GameHeader from '../GameHeader/GameHeader';
+import CardGrid from '../CardGrid/CardGrid';
+import Carousel from "../Carousel/Carousel";
 import axios from 'axios';
-import { url, method, headers, topReleases, popular } from '../js/api';
+import './Home.scss';
+import { url, method, headers, topReleases, popular } from '../../js/api';
 
 class Home extends Component {
     state = {

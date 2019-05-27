@@ -1,6 +1,6 @@
 import React from 'react';
+import './RatingStars.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { dom } from '@fortawesome/fontawesome-svg-core'
 
 
 

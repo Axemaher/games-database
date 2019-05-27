@@ -1,0 +1,23 @@
+@import "../variables.scss";
+.header {
+    width: 1400px;
+    .nav-group{
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      list-style: none;
+      .home-btn{
+        color: $primary-font;
+        font-weight: bold;
+        text-decoration: none;
+      }
+      .search-btn{
+        cursor: pointer;
+      }
+    }
+  }
+  @media screen and (max-width: 1400px) {
+    .header{
+      width: 100%;
+    }
+  }

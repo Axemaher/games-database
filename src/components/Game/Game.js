@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import GameHeader from './GameHeader'
+import GameHeader from '../GameHeader/GameHeader'
 
-import { url, method, headers, gameById } from '../js/api';
+import { url, method, headers, gameById } from '../../js/api';
 
 const Game = ({ match }) => {
 

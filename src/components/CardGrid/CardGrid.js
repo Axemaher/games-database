@@ -1,4 +1,5 @@
 import React from 'react';
+import './CardGrid.scss';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 

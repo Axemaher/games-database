@@ -1,0 +1,18 @@
+.social-links {
+    display: flex;
+    list-style: none;
+  }
+  
+  .social-link {
+    margin-right: 10px;
+  }
+  
+  .social-icon {
+    width: 35px;
+  }
+  
+@media screen and (max-width: 1200px) {
+    .social-links{
+      margin: 7px 0;
+    }
+  }

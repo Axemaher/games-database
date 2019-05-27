@@ -1,0 +1,31 @@
+@import "../variables.scss";
+
+.section-carousel{
+    width: 1200px;
+    flex-direction: column;
+    margin: 0 auto; 
+  }
+  .carousel-item{
+    width: 130px;
+    height: 130px;
+    margin: 10px auto 80px auto;
+    list-style: none;
+    text-align: center;
+    .carousel-item-href{
+      text-decoration: none;
+      color: $primary-font;
+    }
+    .carousel-item__image{
+      height: 100%;
+      background-size: cover;
+      background-position-x: center;
+    }
+    .carousel-item__name{
+      padding-top: 6px;
+    }
+  }
+  @media screen and (max-width: 1200px) {
+    .section-carousel {
+      width: 100%;
+    }
+  }
