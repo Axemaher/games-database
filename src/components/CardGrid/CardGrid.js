@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
 const CardGrid = ({ data, sectionTitle }) => {
+    console.log(data)
     const items = data.map(el => (
         <li key={el.id} className="card-grid-item">
             <div className="card-grid-item__image" style={{ backgroundImage: "url('//images.igdb.com/igdb/image/upload/t_screenshot_med/" + el.screenshots[Math.floor((Math.random() * el.screenshots.length) + 0)].image_id + ".jpg')" }}></div>

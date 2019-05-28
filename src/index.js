@@ -4,10 +4,10 @@ import './index.scss';
 import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
+import { faStar as farStar, faPlayCircle } from '@fortawesome/free-regular-svg-icons'
 import { faSearch, faStar } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faSearch, faStar, farStar)
+library.add(faSearch, faStar, farStar, faPlayCircle)
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

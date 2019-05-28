@@ -1,14 +1,32 @@
 import React, { useState } from 'react';
 import './Gallery.scss';
 import 'lightbox-react/style.css';
-// import VideoIframe from 'components/video';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Lightbox from 'lightbox-react';
 
 
-const Gallery = ({ data }) => {
+const Gallery = ({ data, sectionTitle, videoGallery }) => {
+    const maxThumbnails = 10;
+    let items = [];
+    let thumbnails = [];
+    if (videoGallery) {
+        items = data.map(el => <iframe className="video-iframe" src={'//www.youtube.com/embed/' + el.video_id} frameBorder="0" allowFullScreen></iframe>);
+        data.forEach(function (el) {
+            thumbnails.push({
+                url: 'http://img.youtube.com/vi/' + el.video_id + '/0.jpg',
+                name: el.name
+            })
+        });
+    } else {
+        items = data.map(el => '//images.igdb.com/igdb/image/upload/t_1080p/' + el.image_id + '.jpg');
+        data.forEach(function (el) {
+            thumbnails.push({
+                url: '//images.igdb.com/igdb/image/upload/t_screenshot_med/' + el.image_id + '.jpg'
+            })
+        });
+    }
 
-    const items1080p = data.map(el => '//images.igdb.com/igdb/image/upload/t_1080p/' + el.image_id + '.jpg');
-    const itemsSmall = data.map(el => '//images.igdb.com/igdb/image/upload/t_screenshot_med/' + el.image_id + '.jpg');
+    thumbnails.length > maxThumbnails ? thumbnails.length = maxThumbnails : thumbnails.length = thumbnails.length;
 
     const [photoIndex, setPhotoIndex] = useState(0);
     const [isOpen, setIsOpen] = useState(false);
@@ -19,24 +37,25 @@ const Gallery = ({ data }) => {
     }
     return (
         <section className="section section-gallery">
-            <h2 className="section-title">screenshots</h2>
+            <h2 className="section-title">{sectionTitle}</h2>
             <div className="gallery-grid">
                 <ul className="gallery-items-list">
-                    {itemsSmall.map((item, index) =>
-                        <li key={index}>
-                            <img className="gallery-item" src={item} alt="screenshot" onClick={() => click(index)} />
+                    {thumbnails.map((item, index) =>
+                        <li className={videoGallery ? 'video-container' : "image-container"} key={index}>
+                            <img className={videoGallery ? 'video-item' : "image-item"} src={item.url} alt="screenshot" onClick={() => click(index)} />
+                            {videoGallery && <span className="video-name">{item.name}</span>}
                         </li>
                     )}
                 </ul>
             </div>
             {isOpen && (
                 <Lightbox
-                    mainSrc={items1080p[photoIndex]}
-                    nextSrc={items1080p[(photoIndex + 1) % items1080p.length]}
-                    prevSrc={items1080p[(photoIndex + items1080p.length - 1) % items1080p.length]}
+                    mainSrc={items[photoIndex]}
+                    nextSrc={items[(photoIndex + 1) % items.length]}
+                    prevSrc={items[(photoIndex + items.length - 1) % items.length]}
                     onCloseRequest={() => setIsOpen(false)}
-                    onMovePrevRequest={() => setPhotoIndex((photoIndex + items1080p.length - 1) % items1080p.length)}
-                    onMoveNextRequest={() => setPhotoIndex((photoIndex + 1) % items1080p.length)}
+                    onMovePrevRequest={() => setPhotoIndex((photoIndex + items.length - 1) % items.length)}
+                    onMoveNextRequest={() => setPhotoIndex((photoIndex + 1) % items.length)}
                 />
             )}
         </section>

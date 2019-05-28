@@ -29,7 +29,10 @@ const Game = ({ match }) => {
                 <>
                     <main className="main">
                         <GameHeader data={data[0]} />
-                        <Gallery data={data[0].screenshots} />
+                        {data[0].screenshots !== null && <Gallery data={data[0].screenshots} sectionTitle={"Screenshots"} videoGallery={false} />}
+                        {data[0].artworks !== undefined && <Gallery data={data[0].artworks} sectionTitle={"Artworks"} videoGallery={false} />}
+                        {data[0].videos !== undefined && <Gallery data={data[0].videos} sectionTitle={"Videos"} videoGallery={true} />}
+
                     </main>
                 </>
             }

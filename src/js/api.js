@@ -22,4 +22,4 @@ fields id, name, screenshots.*, summary, rating, release_dates.human, involved_c
 where popularity > 100 & screenshots > 0 & release_dates != null & themes != 42;
 sort popularity desc;`;
 
-export const gameById = `fields cover.*, name, screenshots.*, rating, release_dates.human, websites.*, involved_companies.company.name, themes.name`
+export const gameById = `fields cover.*, name, screenshots.*, videos.*, artworks.*, rating, release_dates.human, websites.*, involved_companies.company.name, themes.name`
