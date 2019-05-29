@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './Gallery.scss';
 import 'lightbox-react/style.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Lightbox from 'lightbox-react';
 
 

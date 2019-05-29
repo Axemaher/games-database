@@ -1,0 +1,107 @@
+@import "../variables.scss";
+
+.game-navigation {
+    width: 1200px;
+    @media screen and (max-width: 1200px) {
+    width: 100%;
+    }
+}
+
+.sticky {
+    position: sticky;
+    top: 0px;
+    z-index: 3;
+    margin: 0 auto;
+    background-color: white;
+    @media screen and (max-width: 1200px) {
+        width: 100%;
+    }
+}
+
+.navigation-group {
+    display: flex;
+    position: relative;
+}
+
+.navigation-group::after {
+    content: '';
+    height: 3px;
+    width: 100%;
+    position: absolute;
+    right: 0;
+    bottom: 16px;
+    background-color: rgba(49, 54, 66, .1);
+}
+
+.navigation-element {
+    width: 100px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #595959;
+    border-bottom: 3px solid #595959;
+    margin: 16px 0 16px 16px;
+    z-index: 3;
+    transition: all .3s;
+    &:hover {
+        cursor: pointer;
+        color: $secondary-font;
+        border-bottom: 3px solid $secondary-font;
+    }
+}
+
+.navigation-element-active {
+    color: $secondary-font;
+    border-bottom: 3px solid $secondary-font;
+}
+
+
+
+.navigation-element__icon {
+    font-size: 30px;
+}
+
+.navigation-element__label {
+    padding: 6px 0;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 600px) {
+    .navigation-group::after{
+        display: none;
+    }
+    .navigation-element {
+        width: 60px;
+        height: 40px;
+        margin: 0px;
+    }
+    .navigation-element__icon {
+        font-size: 16px;
+    }
+    .navigation-element__label {
+        font-size: 10px;
+    }
+    .navigation-group {
+        justify-content: space-between;
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .navigation-element {
+        width: auto;
+        height: 40px;
+        border-bottom: none;
+    }
+    .navigation-element__icon {
+        font-size: 16px;
+    }
+    .navigation-element__label {
+        font-size: 10px;
+    }
+    .navigation-element:hover {
+        border-bottom: none;
+    }
+}

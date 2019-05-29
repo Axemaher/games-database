@@ -9,7 +9,7 @@ const GameHeader = ({ data, gameNameBefore }) => {
     console.log(data)
 
     const { id, cover, name, screenshots, release_dates, involved_companies, websites, rating } = data;
-    const backgroundUrl = '//images.igdb.com/igdb/image/upload/t_1080p/' + screenshots[Math.floor((Math.random() * screenshots.length) + 0)].image_id + '.jpg';
+    const backgroundUrl = '//images.igdb.com/igdb/image/upload/t_1080p/' + screenshots[0].image_id + '.jpg';
     const coverUrl = `//images.igdb.com/igdb/image/upload/t_cover_big/${cover.image_id}.jpg`;
     const releaseDate = release_dates[0].human;
 
