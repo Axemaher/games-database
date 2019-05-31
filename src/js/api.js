@@ -1,6 +1,6 @@
 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 const targetUrl = 'https://api-v3.igdb.com/games';
-const API_KEY = '5fccca9c9526e977331af051c184e3cd';
+const API_KEY = '0b05b1c911ee9a22cbadcbefe2184ab0';
 
 const dateNow = Math.round((new Date()).getTime() / 1000);
 
@@ -23,3 +23,5 @@ where popularity > 100 & screenshots > 0 & release_dates != null & themes != 42;
 sort popularity desc;`;
 
 export const gameById = `fields cover.*, name, screenshots.*, summary, storyline, videos.*, artworks.*, rating, release_dates.human, websites.*, involved_companies.company.name, themes.name`
+
+

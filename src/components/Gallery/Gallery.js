@@ -1,26 +1,31 @@
 import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 import './Gallery.scss';
 import 'lightbox-react/style.css';
 import Lightbox from 'lightbox-react';
 
 
 const Gallery = ({ data, sectionTitle, videoGallery }) => {
+    const [loaded, setLoaded] = useState(false);
     const maxThumbnails = 10;
     let items = [];
     let thumbnails = [];
+    const myRef = React.createRef();
     if (videoGallery) {
         items = data.map(el => <iframe className="video-iframe" src={'//www.youtube.com/embed/' + el.video_id} frameBorder="0" allowFullScreen></iframe>);
         data.forEach(function (el) {
             thumbnails.push({
                 url: 'http://img.youtube.com/vi/' + el.video_id + '/0.jpg',
-                name: el.name
+                name: el.name,
+                loaded: false
             })
         });
     } else {
         items = data.map(el => '//images.igdb.com/igdb/image/upload/t_1080p/' + el.image_id + '.jpg');
         data.forEach(function (el) {
             thumbnails.push({
-                url: '//images.igdb.com/igdb/image/upload/t_screenshot_med/' + el.image_id + '.jpg'
+                url: '//images.igdb.com/igdb/image/upload/t_screenshot_med/' + el.image_id + '.jpg',
+                loaded: false
             })
         });
     }
@@ -34,14 +39,26 @@ const Gallery = ({ data, sectionTitle, videoGallery }) => {
         setPhotoIndex(index);
         setIsOpen(true);
     }
+    const imageLoaded = index => {
+        thumbnails[index].loaded = true;
+        if (thumbnails.filter(el => el.loaded).length === thumbnails.length) {
+            setLoaded(true)
+            window.scrollTo({
+                top: myRef.current.offsetTop,
+                behavior: 'smooth',
+            })
+            // window.scrollTo(0, myRef.current.offsetTop);
+        }
+    }
     return (
         <section className="section section-gallery">
             <h2 className="section-title">{sectionTitle}</h2>
             <div className="gallery-grid">
-                <ul className="gallery-items-list">
+                <ul ref={myRef} className="gallery-items-list">
+
                     {thumbnails.map((item, index) =>
                         <li className={videoGallery ? 'video-container' : "image-container"} key={index}>
-                            <img className={videoGallery ? 'video-item' : "image-item"} src={item.url} alt="screenshot" onClick={() => click(index)} />
+                            <img className={videoGallery ? 'video-item' : "image-item"} src={item.url} alt="screenshot" onClick={() => click(index)} onLoad={() => imageLoaded(index)} />
                             {videoGallery && <span className="video-name">{item.name}</span>}
                         </li>
                     )}

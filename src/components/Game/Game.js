@@ -9,7 +9,7 @@ import { url, method, headers, gameById } from '../../js/api';
 const Game = ({ match }) => {
 
     const [data, setdata] = useState(null);
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState("pVideo");
 
     useEffect(() => {
         axios({
@@ -43,7 +43,7 @@ const Game = ({ match }) => {
                                 Boolean(data.screenshots) && tabsData.screen,
                                 Boolean(data.artworks) && tabsData.art
                             ]}
-                            page={page}
+                            pageId={page}
                             setPage={setPage}
                         />
                         {page === tabsData.screen.id && <Gallery data={data.screenshots} sectionTitle={"Screenshots"} videoGallery={false} />}
