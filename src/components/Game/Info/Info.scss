@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 .section-info{
     width: 1200px;
     flex-direction: column;
@@ -9,7 +11,7 @@
 }
 .informations {
     width: 1200px;
-    color: black;
+    color: $primary-font;
     display: flex;
     flex-wrap: wrap;
     @media screen and (max-width: 1200px) {
@@ -48,7 +50,7 @@
     content: "";
     height: calc(100% + 30px);
     width: 3px;
-    background-color: rgb(0, 193, 201);
+    background-color: $secondary-font;
     position: absolute;
     top: -27px;
     left: -10px;

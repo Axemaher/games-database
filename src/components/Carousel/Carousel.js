@@ -6,11 +6,11 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
 const Carousel = ({ data, sectionTitle }) => {
-
+    console.log(data)
     const slidesData = data.map((item, i) => (
         <div key={i} className="carousel-item">
             <Link to={`/game/${item.id}`} className="carousel-item-href">
-                <div className="carousel-item__image" style={{ backgroundImage: `url(//images.igdb.com/igdb/image/upload/t_cover_big/${item.cover.image_id}.jpg)` }}></div>
+                <div className="carousel-item__image" style={{ backgroundImage: `url(//images.igdb.com/igdb/image/upload/t_cover_big/${item.cover}.jpg)` }}></div>
                 <p className="carousel-item__name">{item.name}</p>
             </Link>
         </div>
@@ -18,11 +18,11 @@ const Carousel = ({ data, sectionTitle }) => {
 
 
     const responsive = {
-        0: { items: 2 },
-        500: { items: 3 },
-        700: { items: 4 },
-        900: { items: 5 },
-        1024: { items: 7 },
+        0: { items: 3 },
+        500: { items: 4 },
+        700: { items: 5 },
+        900: { items: 6 },
+        1024: { items: 8 },
     };
 
 

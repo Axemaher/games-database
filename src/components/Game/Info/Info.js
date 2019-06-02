@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import './Info.scss';
-import { gameCategory, gameStatus } from '../../js/utils.js'
+import { gameCategory, gameStatus } from '../../../js/utils.js'
 
 const Info = ({ data, sectionTitle }) => {
+    console.log(data)
+
     const myRef = React.createRef();
     useEffect(() => {
         window.scrollTo({

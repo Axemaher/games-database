@@ -36,7 +36,7 @@ class Home extends Component {
                 {dataTopRelease.length > 5 ?
                     <>
                         <GameHeader data={dataTopRelease[Math.floor((Math.random() * dataTopRelease.length) + 0)]} gameNameBefore={true} />
-                        <Carousel data={dataTopRelease} sectionTitle="Coming soon" />
+                        <Carousel data={dataTopRelease.map(function (el) { return { id: el.id, name: el.name, cover: el.cover.image_id } })} sectionTitle="Coming soon" />
                         <CardGrid data={dataPopularity} sectionTitle="Popular" />
                     </>
 

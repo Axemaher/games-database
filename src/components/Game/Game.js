@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import GameHeader from '../GameHeader/GameHeader';
-import Gallery from '../Gallery/Gallery';
-import GameNav from '../GameNav/GameNav';
-import Info from '../Info/Info';
+import Gallery from './Gallery/Gallery';
+import GameNav from './GameNav/GameNav';
+import Info from './Info/Info';
+import Desc from './Desc/Desc';
+import Carousel from '../Carousel/Carousel'
+
 // import gameData from '../../js/gameData';
 
 import { url, method, headers, gameById } from '../../js/api';
@@ -11,8 +14,7 @@ import { url, method, headers, gameById } from '../../js/api';
 const Game = ({ match }) => {
 
     const [data, setdata] = useState(null);
-    const [page, setPage] = useState("pVideo");
-
+    const [page, setPage] = useState(null);
     useEffect(() => {
         const getData = () => {
             axios({
@@ -26,7 +28,14 @@ const Game = ({ match }) => {
             // setdata(gameData);
         }
         getData();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        })
+        setPage(null);
     }, [match.params.id])
+
+
     const tabsData = {
         info: { name: "Informations", icon: "info", id: "pInfo" },
         desc: { name: "Description", icon: "list", id: "pDesc" },
@@ -54,11 +63,12 @@ const Game = ({ match }) => {
                             pageId={page}
                             setPage={setPage}
                         />
+                        {page === desc.id && <Desc summary={data.summary} storyline={data.storyline} sectionTitle={desc.name} />}
                         {page === info.id && <Info data={data} sectionTitle={info.name} />}
-                        {page === screen.id && <Gallery data={data.screenshots} sectionTitle={"Screenshots"} videoGallery={false} />}
-                        {page === art.id && <Gallery data={data.artworks} sectionTitle={"Artworks"} videoGallery={false} />}
-                        {page === video.id && <Gallery data={data.videos} sectionTitle={"Videos"} videoGallery={true} />}
-
+                        {page === screen.id && <Gallery data={data.screenshots} sectionTitle={screen.name} videoGallery={false} />}
+                        {page === art.id && <Gallery data={data.artworks} sectionTitle={art.name} videoGallery={false} />}
+                        {page === video.id && <Gallery data={data.videos} sectionTitle={video.name} videoGallery={true} />}
+                        <Carousel data={data.similar_games.filter(el => el.cover !== undefined).map(function (el) { return { id: el.id, name: el.name, cover: el.cover.image_id } })} sectionTitle={"Similar games"} />
                     </main>
                 </>
             }

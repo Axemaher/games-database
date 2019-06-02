@@ -1,0 +1,46 @@
+@import "../../variables.scss";
+
+.section-desc{
+    width: 1200px;
+    flex-direction: column;
+    margin: 0 auto; 
+    @media screen and (max-width: 1200px) {
+        width: 100%;
+        padding: 0 10px;
+  }
+}
+.description{
+    width: 1200px;
+    color: $primary-font;
+    display: flex;
+    flex-wrap: wrap;
+    @media screen and (max-width: 1200px) {
+        width: 100%;
+    }
+}
+
+.description-container {
+    margin-bottom: 40px;
+    margin-left: 20px;
+}
+
+.description-category {
+    font-weight: bold;
+    font-size: 20px;
+    padding: 16px 0 6px 0;
+}
+
+.description-content {
+    position: relative;
+    padding-left: 20px;
+}
+
+.description-content::before {
+    content: "";
+    height: calc(100% + 30px);
+    width: 3px;
+    background-color: $secondary-font;
+    position: absolute;
+    top: -27px;
+    left: -10px;
+}
