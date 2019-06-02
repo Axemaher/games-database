@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
 const GameHeader = ({ data, gameNameBefore }) => {
-    console.log(data)
 
     const { id, cover, name, screenshots, release_dates, involved_companies, websites, rating } = data;
     const backgroundUrl = '//images.igdb.com/igdb/image/upload/t_1080p/' + screenshots[0].image_id + '.jpg';

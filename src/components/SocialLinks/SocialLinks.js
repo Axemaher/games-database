@@ -1,6 +1,6 @@
 import React from 'react';
 import './SocialLinks.scss'
-import { websitesIcons } from '../../js/websitesIcons';
+import { websitesIcons } from '../../js/utils';
 
 
 const SocialLinks = ({ data }) => {

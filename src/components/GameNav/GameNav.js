@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 const GameNav = ({ tabsData, pageId, setPage }) => {
-    console.log(tabsData)
     return (
         <section className="sticky">
             <nav className="game-navigation">
@@ -23,5 +22,3 @@ const GameNav = ({ tabsData, pageId, setPage }) => {
 
 export default GameNav;
 
-
-// navigation-element-active

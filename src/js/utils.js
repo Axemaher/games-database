@@ -34,3 +34,28 @@ export const websitesIcons = (value, url) => {
         default: return null;
     }
 }
+
+export const gameCategory = value => {
+    switch (value) {
+        case 0: return [{ name: "Main game" }];
+        case 1: return [{ name: "DLC" }];
+        case 2: return [{ name: "Expansion" }];
+        case 3: return [{ name: "Bundle" }];
+        case 4: return [{ name: "Standalone expansion" }];
+        default: return undefined;
+    }
+}
+
+export const gameStatus = value => {
+    switch (value) {
+        case 0: return [{ name: "Released" }];
+        case 2: return [{ name: "Alpha" }];
+        case 3: return [{ name: "Beta" }];
+        case 4: return [{ name: "Early access" }];
+        case 5: return [{ name: "Offline" }];
+        case 6: return [{ name: "Cancelled" }];
+        default: return undefined
+    }
+}
+
+export default websitesIcons;

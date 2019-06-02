@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 import './Gallery.scss';
 import 'lightbox-react/style.css';
 import Lightbox from 'lightbox-react';
 
 
 const Gallery = ({ data, sectionTitle, videoGallery }) => {
-    const [loaded, setLoaded] = useState(false);
     const maxThumbnails = 10;
     let items = [];
     let thumbnails = [];
     const myRef = React.createRef();
     if (videoGallery) {
-        items = data.map(el => <iframe className="video-iframe" src={'//www.youtube.com/embed/' + el.video_id} frameBorder="0" allowFullScreen></iframe>);
+        items = data.map(el => <iframe title={el.video_id} className="video-iframe" src={'//www.youtube.com/embed/' + el.video_id} frameBorder="0" allowFullScreen></iframe>);
         data.forEach(function (el) {
             thumbnails.push({
                 url: 'http://img.youtube.com/vi/' + el.video_id + '/0.jpg',
@@ -29,8 +27,10 @@ const Gallery = ({ data, sectionTitle, videoGallery }) => {
             })
         });
     }
+    if (thumbnails.length > maxThumbnails) {
+        thumbnails.length = maxThumbnails
+    }
 
-    thumbnails.length > maxThumbnails ? thumbnails.length = maxThumbnails : thumbnails.length = thumbnails.length;
 
     const [photoIndex, setPhotoIndex] = useState(0);
     const [isOpen, setIsOpen] = useState(false);
@@ -42,12 +42,10 @@ const Gallery = ({ data, sectionTitle, videoGallery }) => {
     const imageLoaded = index => {
         thumbnails[index].loaded = true;
         if (thumbnails.filter(el => el.loaded).length === thumbnails.length) {
-            setLoaded(true)
             window.scrollTo({
                 top: myRef.current.offsetTop,
                 behavior: 'smooth',
             })
-            // window.scrollTo(0, myRef.current.offsetTop);
         }
     }
     return (
