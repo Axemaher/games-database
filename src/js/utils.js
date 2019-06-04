@@ -58,4 +58,12 @@ export const gameStatus = value => {
     }
 }
 
+export const tabsInformations = {
+    tabInfo: { name: "Informations", icon: "info", id: 1 },
+    tabDesc: { name: "Description", icon: "list", id: 2 },
+    tabVideo: { name: "Videos", icon: "video", id: 3 },
+    tabScreen: { name: "Screenshots", icon: "desktop", id: 4 },
+    tabArt: { name: "Artworks", icon: "pencil-ruler", id: 5 }
+}
+
 export default websitesIcons;

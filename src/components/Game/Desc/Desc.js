@@ -4,13 +4,14 @@ import './Desc.scss';
 const Desc = ({ summary, storyline, sectionTitle }) => {
 
     const myRef = React.createRef();
+
     useEffect(() => {
         window.scrollTo({
             top: myRef.current.offsetTop,
             behavior: 'smooth',
         })
     }, [myRef])
-    console.log(storyline)
+
     return (
         <section ref={myRef} className="section section-desc">
             <h2 className="section-title">{sectionTitle}</h2>
@@ -28,9 +29,7 @@ const Desc = ({ summary, storyline, sectionTitle }) => {
                         </p>
                     </div>
                 }
-
             </div>
-
         </section>
     );
 }

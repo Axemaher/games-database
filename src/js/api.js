@@ -13,12 +13,12 @@ export const headers = {
 };
 
 export const topReleases = `limit 16;
-fields cover.*, name, screenshots.*, rating, release_dates.human, websites.*, involved_companies.company.name, themes.name;
+fields cover.image_id, name, screenshots.image_id, rating, release_dates.human, websites.category, websites.url, involved_companies.company.name, themes.name;
 where first_release_date > ${dateNow} & first_release_date < ${dateNow + 604800} & screenshots > 0 & cover != null & involved_companies.company.name != null;
 sort popularity desc;`;
 
 export const popular = `limit 8;
-fields id, name, screenshots.*, summary, rating, release_dates.human, involved_companies.company.*, themes.*;
+fields id, name, screenshots.image_id, summary, rating, release_dates.human, themes.name;
 where popularity > 100 & screenshots > 0 & release_dates != null & themes != 42;
 sort popularity desc;`;
 
@@ -34,14 +34,15 @@ genres.name,
 involved_companies.company.*, 
 platforms.name, 
 player_perspectives.name, 
-screenshots.*, 
+screenshots.image_id, 
+themes.name,
 similar_games.id,
 similar_games.name,
 similar_games.cover.image_id, 
-videos.*, 
+videos.name,
+videos.video_id, 
 release_dates.human, 
-websites.*, 
-themes.name`
+websites.*`
 
 
 

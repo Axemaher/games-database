@@ -6,6 +6,8 @@ import GameNav from './GameNav/GameNav';
 import Info from './Info/Info';
 import Desc from './Desc/Desc';
 import Carousel from '../Carousel/Carousel'
+import { tabsInformations } from '../../js/utils';
+
 
 // import gameData from '../../js/gameData';
 
@@ -13,65 +15,141 @@ import { url, method, headers, gameById } from '../../js/api';
 
 const Game = ({ match }) => {
 
-    const [data, setdata] = useState(null);
     const [page, setPage] = useState(null);
+    const [dataHeader, setDataHeader] = useState(null);
+    const [tabsVisibles, setTabsVisibles] = useState(null);
+    const [dataTabs, setDataTabs] = useState(null);
+    const [similarGames, setSimilarGames] = useState(null);
+
     useEffect(() => {
         const getData = () => {
             axios({
                 url, method, headers, data: `${gameById}; where id = ${match.params.id};`
             })
+                /// HEADER DATA
                 .then(response => {
-                    setdata(response.data[0]);
+                    let dataHeader = response.data[0];
                     console.log(response.data[0])
+                    const { id, cover, name, screenshots, release_dates, involved_companies, websites, rating } = dataHeader;
+                    dataHeader = {
+                        id,
+                        cover: cover.image_id,
+                        name,
+                        screenshots,
+                        release_date: (release_dates === undefined ? undefined : release_dates[0].human),
+                        involved_companie: (involved_companies === undefined ? undefined : involved_companies[0].company.name),
+                        websites,
+                        rating
+                    }
+                    setDataHeader(dataHeader);
+                    return response;
+                })
+                /// TABS VISIBLES
+                .then(response => {
+                    let tabsVisibles = response.data[0];
+                    const { summary, storyline, videos, screenshots, artworks } = tabsVisibles;
+                    tabsVisibles = {
+                        informations: true,
+                        description: Boolean(summary) || Boolean(storyline),
+                        videos: Boolean(videos),
+                        screenshots: Boolean(screenshots),
+                        artworks: Boolean(artworks)
+                    };
+                    setTabsVisibles(tabsVisibles);
+                    return response;
+                })
+
+                /// INFO DATA
+                .then(response => {
+                    let dataTabs = response.data[0];
+                    const { themes, genres, game_engines, game_modes, platforms, alternative_names, player_perspectives, status, category, summary, storyline, videos, screenshots, artworks } = dataTabs;
+                    dataTabs = {
+                        informations: {
+                            themes, genres, game_engines, game_modes, platforms, alternative_names, player_perspectives, status, category
+                        },
+                        description: { summary, storyline },
+                        videos,
+                        screenshots,
+                        artworks
+                    };
+                    setDataTabs(dataTabs);
+                    return response;
+                })
+                /// SIMILAR GAMES DATA
+                .then(response => {
+                    let similarGames = response.data[0].similar_games;
+                    similarGames = similarGames.filter(el => el.cover !== undefined)
+                        .map(function (el) {
+                            return {
+                                id: el.id,
+                                name: el.name,
+                                cover: el.cover.image_id
+                            }
+                        })
+                    setSimilarGames(similarGames);
                 })
                 .catch(err => console.error(err));
-            // setdata(gameData);
         }
+
         getData();
         window.scrollTo({
             top: 0,
             behavior: 'smooth',
-        })
+        });
+
         setPage(null);
+
     }, [match.params.id])
 
-
-    const tabsData = {
-        info: { name: "Informations", icon: "info", id: "pInfo" },
-        desc: { name: "Description", icon: "list", id: "pDesc" },
-        video: { name: "Videos", icon: "video", id: "pVideo" },
-        screen: { name: "Screenshots", icon: "desktop", id: "pScreen" },
-        art: { name: "Artworks", icon: "pencil-ruler", id: "pArt" }
-    }
-    const { info, desc, video, screen, art } = tabsData;
-
+    const { tabInfo, tabDesc, tabVideo, tabScreen, tabArt } = tabsInformations;
     return (
         <>
-            {data === null ?
-                <p>loading</p> :
-                <>
-                    <main className="main">
-                        <GameHeader data={data} />
-                        <GameNav
-                            tabsData={[
-                                info,
-                                (Boolean(data.summary) || Boolean(data.storyline)) && desc,
-                                Boolean(data.videos) && video,
-                                Boolean(data.screenshots) && screen,
-                                Boolean(data.artworks) && art
-                            ]}
-                            pageId={page}
-                            setPage={setPage}
-                        />
-                        {page === desc.id && <Desc summary={data.summary} storyline={data.storyline} sectionTitle={desc.name} />}
-                        {page === info.id && <Info data={data} sectionTitle={info.name} />}
-                        {page === screen.id && <Gallery data={data.screenshots} sectionTitle={screen.name} videoGallery={false} />}
-                        {page === art.id && <Gallery data={data.artworks} sectionTitle={art.name} videoGallery={false} />}
-                        {page === video.id && <Gallery data={data.videos} sectionTitle={video.name} videoGallery={true} />}
-                        <Carousel data={data.similar_games.filter(el => el.cover !== undefined).map(function (el) { return { id: el.id, name: el.name, cover: el.cover.image_id } })} sectionTitle={"Similar games"} />
-                    </main>
-                </>
-            }
+            <main className="main">
+                {dataHeader === null ? "loading" :
+                    <GameHeader
+                        data={dataHeader}
+                    />}
+                {tabsVisibles === null || tabsVisibles.length === 0 ? "loading" :
+                    <GameNav
+                        dataVisibles={tabsVisibles}
+                        pageId={page}
+                        setPage={setPage}
+                    />}
+                {page === tabInfo.id &&
+                    <Info
+                        data={dataTabs.informations}
+                        sectionTitle={tabInfo.name}
+                    />}
+                {page === tabDesc.id &&
+                    <Desc
+                        summary={dataTabs.description.summary}
+                        storyline={dataTabs.description.storyline}
+                        sectionTitle={tabDesc.name}
+                    />}
+                {page === tabVideo.id &&
+                    <Gallery
+                        data={dataTabs.videos}
+                        sectionTitle={tabVideo.name}
+                        videoGallery={true}
+                    />}
+                {page === tabScreen.id &&
+                    <Gallery
+                        data={dataTabs.screenshots}
+                        sectionTitle={tabScreen.name}
+                        videoGallery={false}
+                    />}
+                {page === tabArt.id &&
+                    <Gallery
+                        data={dataTabs.artworks}
+                        sectionTitle={tabArt.name}
+                        videoGallery={false}
+                    />}
+                {similarGames === null ? "loading" :
+                    <Carousel
+                        data={similarGames}
+                        sectionTitle={"Similar games"}
+                    />}
+            </main>
         </>
     );
 }

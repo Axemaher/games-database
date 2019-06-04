@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import GameHeader from '../GameHeader/GameHeader';
 import CardGrid from '../CardGrid/CardGrid';
 import Carousel from "../Carousel/Carousel";
@@ -6,48 +6,77 @@ import axios from 'axios';
 import './Home.scss';
 import { url, method, headers, topReleases, popular } from '../../js/api';
 
-class Home extends Component {
-    state = {
-        dataTopRelease: [],
-        dataPopularity: []
-    }
-    componentDidMount() {
+
+const Home = () => {
+
+    const [dataHeader, setDataHeader] = useState(null)
+    const [dataTopReleased, setDataTopReleased] = useState(null)
+    const [dataPopular, setDataPopular] = useState(null)
+
+    useEffect(() => {
         axios({
             url, method, headers, data: topReleases
         })
+            /// HEADER DATA
             .then(response => {
-                // console.log(response.data);
-                this.setState({ dataTopRelease: response.data })
+                let headerData = response.data[Math.floor((Math.random() * response.data.length) + 0)];
+                const { id, cover, name, screenshots, release_dates, involved_companies, websites, rating } = headerData;
+                headerData = {
+                    id,
+                    cover: cover.image_id,
+                    name,
+                    screenshots,
+                    release_date: release_dates[0].human,
+                    involved_companie: involved_companies[0].company.name,
+                    websites,
+                    rating
+                }
+                setDataHeader(headerData);
+                return response;
+            })
+            /// TOP RELEASED DATA
+            .then(response => {
+                const topRelesedData = response.data.map(function (el) {
+                    return {
+                        id: el.id,
+                        name: el.name,
+                        cover: el.cover.image_id
+                    }
+                })
+                setDataTopReleased(topRelesedData)
             })
             .catch(err => console.error(err));
         axios({
             url, method, headers, data: popular
         })
+            /// POPULAR DATA
             .then(response => {
-                // console.log(response.data);
-                this.setState({ dataPopularity: response.data })
+                const popularData = response.data.map(function (el) {
+                    const { id, name, themes, release_dates, summary, screenshots } = el;
+                    return {
+                        id,
+                        screenshot: screenshots[Math.floor((Math.random() * el.screenshots.length) + 0)].image_id,
+                        name,
+                        theme: themes[0].name,
+                        release_date: release_dates[0].human,
+                        summary
+                    }
+                })
+                setDataPopular(popularData)
             })
             .catch(err => console.error(err));
-    }
-    render() {
-        const { dataTopRelease, dataPopularity } = this.state;
-        return (
-            <main className="main">
-                {dataTopRelease.length > 5 ?
-                    <>
-                        <GameHeader data={dataTopRelease[Math.floor((Math.random() * dataTopRelease.length) + 0)]} gameNameBefore={true} />
-                        <Carousel data={dataTopRelease.map(function (el) { return { id: el.id, name: el.name, cover: el.cover.image_id } })} sectionTitle="Coming soon" />
-                        <CardGrid data={dataPopularity} sectionTitle="Popular" />
-                    </>
+    }, [])
 
-                    : "loading"}
-            </main>
-        );
-    }
+    return (
+        <main className="main">
+            <>
+                {dataHeader === null ? "loading" : <GameHeader data={dataHeader} gameNameBefore={true} />}
+                {dataTopReleased === null ? "loading" : <Carousel data={dataTopReleased} sectionTitle="Coming soon" />}
+                {dataPopular === null ? "loading" : <CardGrid data={dataPopular} sectionTitle="Popular" />}
+            </>
+
+        </main>
+    );
 }
 
 export default Home;
-
-
-
-

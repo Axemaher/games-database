@@ -3,9 +3,9 @@ import './Info.scss';
 import { gameCategory, gameStatus } from '../../../js/utils.js'
 
 const Info = ({ data, sectionTitle }) => {
-    console.log(data)
 
     const myRef = React.createRef();
+
     useEffect(() => {
         window.scrollTo({
             top: myRef.current.offsetTop,
@@ -13,16 +13,18 @@ const Info = ({ data, sectionTitle }) => {
         })
     }, [myRef])
 
+    const { themes, genres, game_engines, game_modes, platforms, alternative_names, player_perspectives, status, category } = data;
+
     let infoContainerData = [
-        { data: data.themes, categoryName: "Themes", id: 0 },
-        { data: data.genres, categoryName: "Genres", id: 1 },
-        { data: data.game_engines, categoryName: "Game engines", id: 2 },
-        { data: data.game_modes, categoryName: "Game modes", id: 3 },
-        { data: data.platforms, categoryName: "Platforms", id: 4 },
-        { data: data.alternative_names, categoryName: "Alternative names", id: 5 },
-        { data: data.player_perspectives, categoryName: "Player perspectives", id: 6 },
-        { data: gameStatus(data.status), categoryName: "Status", id: 7 },
-        { data: gameCategory(data.category), categoryName: "Category", id: 8 },
+        { data: themes, categoryName: "Themes", id: 0 },
+        { data: genres, categoryName: "Genres", id: 1 },
+        { data: game_engines, categoryName: "Game engines", id: 2 },
+        { data: game_modes, categoryName: "Game modes", id: 3 },
+        { data: platforms, categoryName: "Platforms", id: 4 },
+        { data: alternative_names, categoryName: "Alternative names", id: 5 },
+        { data: player_perspectives, categoryName: "Player perspectives", id: 6 },
+        { data: gameStatus(status), categoryName: "Status", id: 7 },
+        { data: gameCategory(category), categoryName: "Category", id: 8 },
     ]
 
     infoContainerData = infoContainerData.filter(data => data.data !== undefined)
@@ -45,7 +47,6 @@ const Info = ({ data, sectionTitle }) => {
 }
 
 const InformationContainer = ({ label, dataNames }) => {
-    console.log(dataNames)
     return (
         <div className="information-container">
             <p className="information-category">{label}:</p>
