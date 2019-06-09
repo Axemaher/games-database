@@ -1,6 +1,9 @@
 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 const targetUrl = 'https://api-v3.igdb.com/games';
-const API_KEY = '0b05b1c911ee9a22cbadcbefe2184ab0';
+const API_KEY = '6e25c84bd2fd1f90934ea9083acd98d6';
+
+// axemaher: 6e25c84bd2fd1f90934ea9083acd98d6
+// axemaher1: 0b05b1c911ee9a22cbadcbefe2184ab0
 
 const dateNow = Math.round((new Date()).getTime() / 1000);
 
@@ -19,8 +22,8 @@ sort popularity desc;`;
 
 export const popular = `limit 8;
 fields id, name, screenshots.image_id, summary, rating, release_dates.human, themes.name;
-where popularity > 100 & screenshots > 0 & release_dates != null & themes != 42;
-sort popularity desc;`;
+where aggregated_rating > 80 & pulse_count > 30 & screenshots > 0 & release_dates != null & themes != 42;
+sort pulse_count desc;`;
 
 export const gameById = `fields *, 
 alternative_names.*, 
@@ -37,12 +40,15 @@ player_perspectives.name,
 screenshots.image_id, 
 themes.name,
 similar_games.id,
-similar_games.name,
+similar_games.name, 
 similar_games.cover.image_id, 
 videos.name,
 videos.video_id, 
 release_dates.human, 
 websites.*`
+
+export const search = `fields *; where version_parent = null;`
+
 
 
 

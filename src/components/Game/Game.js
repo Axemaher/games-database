@@ -5,8 +5,9 @@ import Gallery from './Gallery/Gallery';
 import GameNav from './GameNav/GameNav';
 import Info from './Info/Info';
 import Desc from './Desc/Desc';
-import Carousel from '../Carousel/Carousel'
+import Carousel from '../Carousel/Carousel';
 import { tabsInformations } from '../../js/utils';
+import Loader from '../Loader/Loader';
 
 
 // import gameData from '../../js/gameData';
@@ -105,11 +106,11 @@ const Game = ({ match }) => {
     return (
         <>
             <main className="main">
-                {dataHeader === null ? "loading" :
+                {dataHeader === null ? <Loader /> :
                     <GameHeader
                         data={dataHeader}
                     />}
-                {tabsVisibles === null || tabsVisibles.length === 0 ? "loading" :
+                {tabsVisibles === null || tabsVisibles.length === 0 ? "" :
                     <GameNav
                         dataVisibles={tabsVisibles}
                         pageId={page}
@@ -144,7 +145,7 @@ const Game = ({ match }) => {
                         sectionTitle={tabArt.name}
                         videoGallery={false}
                     />}
-                {similarGames === null ? "loading" :
+                {similarGames === null ? "" :
                     <Carousel
                         data={similarGames}
                         sectionTitle={"Similar games"}

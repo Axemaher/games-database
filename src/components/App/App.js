@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './App.scss';
 import Home from '../Home/Home';
 import Game from "../Game/Game";
+import Search from '../Search/Search';
 
 const App = () => {
   return (
@@ -16,7 +17,7 @@ const App = () => {
                 <Link to="/" className="home-btn">GAMES DATABASE</Link>
               </li>
               <li className="nav-element">
-                <p className="search-btn">SEARCH <FontAwesomeIcon icon="search" /></p>
+                <Link className="search-btn" to="/search">SEARCH <FontAwesomeIcon icon="search" /></Link>
               </li>
             </ul>
           </nav>
@@ -27,6 +28,7 @@ const App = () => {
 
         <Route path="/" exact component={Home} />
         <Route path="/game/:id" component={Game} />
+        <Route path="/search" component={Search} />
 
       </>
     </Router>

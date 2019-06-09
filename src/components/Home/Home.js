@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import GameHeader from '../GameHeader/GameHeader';
 import CardGrid from '../CardGrid/CardGrid';
 import Carousel from "../Carousel/Carousel";
+import Loader from '../Loader/Loader';
 import axios from 'axios';
 import './Home.scss';
 import { url, method, headers, topReleases, popular } from '../../js/api';
@@ -70,9 +71,9 @@ const Home = () => {
     return (
         <main className="main">
             <>
-                {dataHeader === null ? "loading" : <GameHeader data={dataHeader} gameNameBefore={true} />}
-                {dataTopReleased === null ? "loading" : <Carousel data={dataTopReleased} sectionTitle="Coming soon" />}
-                {dataPopular === null ? "loading" : <CardGrid data={dataPopular} sectionTitle="Popular" />}
+                {dataHeader === null ? <Loader /> : <GameHeader data={dataHeader} gameNameBefore={true} />}
+                {dataTopReleased === null ? "" : <Carousel data={dataTopReleased} sectionTitle="Coming soon" />}
+                {dataPopular === null ? "" : <CardGrid data={dataPopular} sectionTitle="Popular" />}
             </>
 
         </main>
