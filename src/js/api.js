@@ -17,7 +17,7 @@ export const headers = {
 
 export const topReleases = `limit 16;
 fields cover.image_id, name, screenshots.image_id, rating, release_dates.human, websites.category, websites.url, involved_companies.company.name, themes.name;
-where first_release_date > ${dateNow} & first_release_date < ${dateNow + 604800} & screenshots > 0 & cover != null & involved_companies.company.name != null;
+where first_release_date > ${dateNow} & first_release_date < ${dateNow + 2419200} & screenshots > 0 & cover != null & involved_companies.company.name != null;
 sort popularity desc;`;
 
 export const popular = `limit 8;
