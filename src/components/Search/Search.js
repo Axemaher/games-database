@@ -3,35 +3,108 @@ import axios from 'axios';
 import './Search.scss';
 import { url, method, headers, search } from '../../js/api';
 import Filter from './Filter';
+import Results from './Results/Results';
+import Loader from '../Loader/Loader';
+
 import * as filtersData from '../../js/filtersData';
 
 
 const Search = () => {
 
     const [searchValue, setSearchValue] = useState("");
-    const [filters, setFilters] = useState(false)
-
-    const handleSubmit = e => {
-        e.preventDefault();
-        console.log(searchValue)
-        axios({
-            url, method, headers, data: search
-            // url, method, headers, data: search + `search "${searchValue}";`
-        })
-            .then(response => {
-                console.log(response.data)
-            })
-            .catch(err => console.error(err));
-    }
 
     const handleChange = e => {
         setSearchValue(e.target.value)
     };
+
+    const [data, setData] = useState(null);
+    const handleSubmit = e => {
+        e.preventDefault();
+        const query = `
+        fields *, cover.*, platforms.*;
+        search "${searchValue}";
+        where aggregated_rating != null;
+        `
+
+        // const query = `
+        // fields *;
+        // search "${searchValue}";
+        // where 
+        // ${xplatformFilterQuery};
+        // `
+
+        // console.log(query)
+        axios({
+            // url, method, headers, data: search
+            url, method, headers, data: query
+        })
+            .then(response => {
+                // console.log(response.data)
+                setData(response.data)
+            })
+            .catch(err => console.error(err));
+    }
+
+    const [xplatformFilterQuery, setPlatformFilterQuery] = useState("");
+
     const platformFilterQuery = data => {
         console.log(data)
+        return data
     }
 
 
+    const [filters, setFilters] = useState(false)
+    const filterComponentsData = [
+        {
+            data: filtersData.platformFilterCheckboxes,
+            getQuery: setPlatformFilterQuery,
+            queryStart: "platforms",
+            title: "Platform"
+        },
+        {
+            data: filtersData.gamemodesFilterCheckboxes,
+            getQuery: platformFilterQuery,
+            queryStart: "game_modes",
+            title: "Game modes"
+        },
+        {
+            data: filtersData.perspectivesFilterCheckboxes,
+            getQuery: platformFilterQuery,
+            queryStart: "perspectives",
+            title: "Perspectives"
+        },
+        {
+            data: filtersData.regionsFilterCheckboxes,
+            getQuery: platformFilterQuery,
+            queryStart: "regions",
+            title: "Regions"
+        },
+        {
+            data: filtersData.esrbFilterCheckboxes,
+            getQuery: platformFilterQuery,
+            queryStart: "esrb",
+            title: "Esrb"
+        },
+        {
+            data: filtersData.pegiFilterCheckboxes,
+            getQuery: platformFilterQuery,
+            queryStart: "pegi",
+            title: "Pegi"
+        },
+        {
+            data: filtersData.genresFilterCheckboxes,
+            getQuery: platformFilterQuery,
+            queryStart: "genres",
+            title: "Genres"
+        },
+        {
+            data: filtersData.themesFilterCheckboxes,
+            getQuery: platformFilterQuery,
+            queryStart: "themes",
+            title: "Themes"
+        },
+    ]
+    // console.log(xplatformFilterQuery)
     return (
         <main className="main">
             <div className="searching">
@@ -52,60 +125,20 @@ const Search = () => {
                         <span>Filters {filters && "close"}</span>
                     </div>
                     <div className={filters ? "filter-container--open" : "filter-container"}>
-                        <Filter
-                            data={filtersData.platformFilterCheckboxes}
-                            getQuery={platformFilterQuery}
-                            queryStart="platforms"
-                            title="Platform"
-                        />
-                        <Filter
-                            data={filtersData.gamemodesFilterCheckboxes}
-                            getQuery={platformFilterQuery}
-                            queryStart="game_modes"
-                            title="Game modes"
-                        />
-                        <Filter
-                            data={filtersData.perspectivesFilterCheckboxes}
-                            getQuery={platformFilterQuery}
-                            queryStart="perspectives"
-                            title="Perspectives"
-                        />
-                        <Filter
-                            data={filtersData.regionsFilterCheckboxes}
-                            getQuery={platformFilterQuery}
-                            queryStart="regions"
-                            title="Regions"
-                        />
-                        <Filter
-                            data={filtersData.esrbFilterCheckboxes}
-                            getQuery={platformFilterQuery}
-                            queryStart="esrb"
-                            title="Esrb"
-                        />
-                        <Filter
-                            data={filtersData.pegiFilterCheckboxes}
-                            getQuery={platformFilterQuery}
-                            queryStart="pegi"
-                            title="Pegi"
-                        />
-                        <Filter
-                            data={filtersData.genresFilterCheckboxes}
-                            getQuery={platformFilterQuery}
-                            queryStart="genres"
-                            title="Genres"
-                        />
-                        <Filter
-                            data={filtersData.themesFilterCheckboxes}
-                            getQuery={platformFilterQuery}
-                            queryStart="themes"
-                            title="Themes"
-                        />
+                        {filterComponentsData.map(el => (
+                            <Filter
+                                key={el.title}
+                                data={el.data}
+                                getQuery={el.getQuery}
+                                queryStart={el.queryStart}
+                                title={el.title}
+                            />
+                        ))}
+
                     </div>
                 </form>
             </div>
-            {/* <div className="search-results">
-                search results
-            </div> */}
+            {data === null ? <Loader /> : <Results data={data} searchValue={searchValue} />}
         </main>
     );
 }

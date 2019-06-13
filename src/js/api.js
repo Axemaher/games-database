@@ -47,7 +47,7 @@ videos.video_id,
 release_dates.human, 
 websites.*`
 
-export const search = `fields *; where version_parent = null;`
+export const search = `fields *; where platform = ();`
 
 
 

@@ -1,0 +1,71 @@
+@import "../../variables.scss";
+.search-results{
+    width:1200px;
+    color: $primary-font;
+}
+.rating__icon{
+    font-size: 16px;
+    color: $secondary-font;
+}
+.rating-count{
+    color: $secondary-font;
+    font-size: 16px;
+}
+
+@media screen and (max-width: 1400px) {
+    header,
+    main{
+        width: 100%;
+    }
+}
+.search-results-list{
+    list-style: none;
+}
+.search-result__cover{
+    width: 40px;
+    grid-area: cover;
+}
+.search-result__game-name{
+    grid-area: game-name;
+    font-size: 16px;
+    font-weight: bold;
+    color: $primary-font;
+    display: flex;
+    align-items: center;
+}
+.platform-list{
+    grid-area: platforms;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.platform-label{
+    padding: 1px 5px;
+    border: 1px solid $primary-font;
+    height: 20px;
+    margin-right: 5px;
+    font-size: 13px;
+}
+.rating{
+    grid-area: rating;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.search-result{
+    margin-top: 20px;
+    border-bottom: 1px solid $gray;
+    display: grid;
+    grid-template-columns: 60px auto 50px;
+     grid-template-rows: auto;
+     grid-template-areas: 
+       "cover game-name rating"
+       "cover platforms platforms";
+}
+@media screen and (max-width: 1200px) {
+    .search-results{
+        width:100%;
+        padding: 0 5px;
+    }
+}

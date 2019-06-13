@@ -34,8 +34,7 @@ const Filter = ({ data, getQuery, queryStart, title }) => {
                             ${showAll ?
                                 "checkbox-container--show-all" :
                                 "checkbox-container--short-ver "
-                            }
-                            `
+                            }`
                         }>
                             <input
                                 id={item.id}
@@ -52,11 +51,11 @@ const Filter = ({ data, getQuery, queryStart, title }) => {
                     ))
                 }
             </ul>
-            {checkedItems.length > shortListCount && !showAll &&
+            {checkedItems.length > shortListCount &&
                 <span
                     className="show-more-btn"
-                    onClick={() => setShowMore(true)}
-                >show more ({checkedItems.length - shortListCount})
+                    onClick={() => setShowMore(!showAll)}
+                >{showAll ? "fold" : `show more (${checkedItems.length - shortListCount})`}
                 </span>
             }
         </div>
