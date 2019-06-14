@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Search.scss';
-import { url, method, headers, search } from '../../js/api';
+import { url, method, headers } from '../../js/api';
 import Filter from './Filter';
 import Results from './Results/Results';
 import Loader from '../Loader/Loader';
@@ -23,17 +23,18 @@ const Search = () => {
         const query = `
         fields *, cover.*, platforms.*;
         search "${searchValue}";
-        where aggregated_rating != null;
+        where cover != null
+        ${platformFilterResult}
+        ${gameModesFilterResult}
+        ${perspecivesFilterResult}
+        ${regionsFilterResult}
+        ${esrbFilterResult}
+        ${pegiFilterResult}
+        ${genresFilterResult}
+        ${themesFilterResult}  
+        ;
+        limit 50;
         `
-
-        // const query = `
-        // fields *;
-        // search "${searchValue}";
-        // where 
-        // ${xplatformFilterQuery};
-        // `
-
-        // console.log(query)
         axios({
             // url, method, headers, data: search
             url, method, headers, data: query
@@ -45,61 +46,63 @@ const Search = () => {
             .catch(err => console.error(err));
     }
 
-    const [xplatformFilterQuery, setPlatformFilterQuery] = useState("");
-
-    const platformFilterQuery = data => {
-        console.log(data)
-        return data
-    }
+    const [platformFilterResult, setPlatformFilterResult] = useState("");
+    const [gameModesFilterResult, setGameModesFilterResult] = useState("");
+    const [perspecivesFilterResult, setPerspecivesFilterResult] = useState("");
+    const [regionsFilterResult, setRegionsFilterResult] = useState("");
+    const [esrbFilterResult, setEsrbFilterResult] = useState("");
+    const [pegiFilterResult, setPegiFilterResult] = useState("");
+    const [genresFilterResult, setGenresFilterResult] = useState("");
+    const [themesFilterResult, setthemesFilterResult] = useState("");
 
 
     const [filters, setFilters] = useState(false)
     const filterComponentsData = [
         {
             data: filtersData.platformFilterCheckboxes,
-            getQuery: setPlatformFilterQuery,
+            getQuery: setPlatformFilterResult,
             queryStart: "platforms",
             title: "Platform"
         },
         {
             data: filtersData.gamemodesFilterCheckboxes,
-            getQuery: platformFilterQuery,
+            getQuery: setGameModesFilterResult,
             queryStart: "game_modes",
             title: "Game modes"
         },
         {
             data: filtersData.perspectivesFilterCheckboxes,
-            getQuery: platformFilterQuery,
+            getQuery: setPerspecivesFilterResult,
             queryStart: "perspectives",
             title: "Perspectives"
         },
         {
             data: filtersData.regionsFilterCheckboxes,
-            getQuery: platformFilterQuery,
+            getQuery: setRegionsFilterResult,
             queryStart: "regions",
             title: "Regions"
         },
         {
             data: filtersData.esrbFilterCheckboxes,
-            getQuery: platformFilterQuery,
+            getQuery: setEsrbFilterResult,
             queryStart: "esrb",
             title: "Esrb"
         },
         {
             data: filtersData.pegiFilterCheckboxes,
-            getQuery: platformFilterQuery,
+            getQuery: setPegiFilterResult,
             queryStart: "pegi",
             title: "Pegi"
         },
         {
             data: filtersData.genresFilterCheckboxes,
-            getQuery: platformFilterQuery,
+            getQuery: setGenresFilterResult,
             queryStart: "genres",
             title: "Genres"
         },
         {
             data: filtersData.themesFilterCheckboxes,
-            getQuery: platformFilterQuery,
+            getQuery: setthemesFilterResult,
             queryStart: "themes",
             title: "Themes"
         },

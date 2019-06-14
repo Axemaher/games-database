@@ -2,6 +2,7 @@
 .search-results{
     width:1200px;
     color: $primary-font;
+    padding-top: 20px;
 }
 .rating__icon{
     font-size: 16px;
@@ -18,6 +19,10 @@
         width: 100%;
     }
 }
+.search-result-label{
+    font-size: 15px;
+    padding-top: 30px;
+}
 .search-results-list{
     list-style: none;
 }
@@ -27,13 +32,18 @@
 }
 .search-result__game-name{
     grid-area: game-name;
-    font-size: 16px;
+    margin-left: 2px;
+    font-size: 14px;
     font-weight: bold;
     color: $primary-font;
-    display: flex;
     align-items: center;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
 }
 .platform-list{
+    margin-left: 2px;
     grid-area: platforms;
     list-style: none;
     display: flex;
@@ -41,23 +51,23 @@
 
 }
 .platform-label{
-    padding: 1px 5px;
-    border: 1px solid $primary-font;
     height: 20px;
     margin-right: 5px;
-    font-size: 13px;
+    font-size: 10px;
 }
 .rating{
+    font-size: 12px;
     grid-area: rating;
     display: flex;
     align-items: center;
     justify-content: flex-end;
 }
 .search-result{
-    margin-top: 20px;
+    margin-top: 10px;
+    min-height: 40px;
     border-bottom: 1px solid $gray;
     display: grid;
-    grid-template-columns: 60px auto 50px;
+    grid-template-columns: 40px auto 75px;
      grid-template-rows: auto;
      grid-template-areas: 
        "cover game-name rating"

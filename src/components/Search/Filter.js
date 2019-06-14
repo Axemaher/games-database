@@ -18,8 +18,9 @@ const Filter = ({ data, getQuery, queryStart, title }) => {
         if (!onlyChecked.length) {
             getQuery("");
         } else {
-            const query = `${queryStart} = (${onlyChecked.map(el => `${el.key}`)})`
+            const query = `& ${queryStart} = (${onlyChecked.map(el => `${el.key}`)})`
             getQuery(query);
+            console.log(query)
         }
     }
     const [showAll, setShowMore] = useState(false);
