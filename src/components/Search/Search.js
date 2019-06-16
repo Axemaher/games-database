@@ -4,7 +4,7 @@ import './Search.scss';
 import { url, method, headers } from '../../js/api';
 import Filter from './Filter';
 import Results from './Results/Results';
-import Loader from '../Loader/Loader';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import * as filtersData from '../../js/filtersData';
 
@@ -12,6 +12,7 @@ import * as filtersData from '../../js/filtersData';
 const Search = () => {
 
     const [searchValue, setSearchValue] = useState("");
+    const [error, setError] = useState(false);
 
     const handleChange = e => {
         setSearchValue(e.target.value)
@@ -20,30 +21,37 @@ const Search = () => {
     const [data, setData] = useState(null);
     const handleSubmit = e => {
         e.preventDefault();
-        const query = `
-        fields *, cover.*, platforms.*;
-        search "${searchValue}";
-        where cover != null
-        ${platformFilterResult}
-        ${gameModesFilterResult}
-        ${perspecivesFilterResult}
-        ${regionsFilterResult}
-        ${esrbFilterResult}
-        ${pegiFilterResult}
-        ${genresFilterResult}
-        ${themesFilterResult}  
-        ;
-        limit 50;
-        `
-        axios({
-            // url, method, headers, data: search
-            url, method, headers, data: query
-        })
-            .then(response => {
-                // console.log(response.data)
-                setData(response.data)
+
+        if (searchValue.length < 3) {
+            setError(true)
+        } else {
+            setFilters(false);
+            setError(false);
+            const query = `
+            fields *, cover.*, platforms.*;
+            search "${searchValue}";
+            where cover != null
+            ${platformFilterResult}
+            ${gameModesFilterResult}
+            ${perspecivesFilterResult}
+            ${regionsFilterResult}
+            ${esrbFilterResult}
+            ${pegiFilterResult}
+            ${genresFilterResult}
+            ${themesFilterResult}  
+            ;
+            limit 50;
+            `
+            axios({
+                // url, method, headers, data: search
+                url, method, headers, data: query
             })
-            .catch(err => console.error(err));
+                .then(response => {
+                    // console.log(response.data)
+                    setData(response.data)
+                })
+                .catch(err => console.error(err));
+        }
     }
 
     const [platformFilterResult, setPlatformFilterResult] = useState("");
@@ -113,6 +121,7 @@ const Search = () => {
                 <form onSubmit={handleSubmit}>
                     <div className="searching-container">
                         <label htmlFor="searchInput"></label>
+                        {error && <span className="search-input-error">please enter at least 3 characters</span>}
                         <input
                             className="search-input"
                             type="text"
@@ -122,9 +131,20 @@ const Search = () => {
                             onChange={handleChange}
                             placeholder="Search..."
                         />
+                        <button className="submit-btn" type="submit" onClick={handleSubmit}>
+                            <FontAwesomeIcon icon="search" />
+                        </button>
                     </div>
-                    <div className="filter-btn" onClick={() => setFilters(!filters)}>
-                        <span>Filters {filters && "close"}</span>
+                    <div className="filter-header">
+                        {!filters ?
+                            <button type="button" className="filter-btn" onClick={() => setFilters(true)}>Show filters</button> :
+                            <button type="button" className="filter-btn" onClick={handleSubmit}>Show results</button>}
+
+
+                        {filters &&
+                            <button type="button" className="filter-close-btn" onClick={() => setFilters(false)}>
+                                <FontAwesomeIcon icon="times" />
+                            </button>}
                     </div>
                     <div className={filters ? "filter-container--open" : "filter-container"}>
                         {filterComponentsData.map(el => (

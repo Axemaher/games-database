@@ -10,7 +10,7 @@ const Desc = ({ summary, storyline, sectionTitle }) => {
             <div className="description">
                 {summary !== undefined &&
                     <div className="description-container">
-                        <p className="description-category">Description:</p>
+                        <p className="description-category">Specification:</p>
                         <p className="description-content">{summary}</p>
                     </div>
                 }

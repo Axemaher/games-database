@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
 const Carousel = ({ data, sectionTitle }) => {
-    console.log(data)
     const slidesData = data.map((item, index) => (
         <div key={index} className="carousel-item">
             <Link to={`/game/${item.id}`} className="carousel-item-href">

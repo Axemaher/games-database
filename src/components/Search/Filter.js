@@ -56,7 +56,7 @@ const Filter = ({ data, getQuery, queryStart, title }) => {
                 <span
                     className="show-more-btn"
                     onClick={() => setShowMore(!showAll)}
-                >{showAll ? "fold" : `show more (${checkedItems.length - shortListCount})`}
+                >{showAll ? "show less" : `show more (${checkedItems.length - shortListCount})`}
                 </span>
             }
         </div>

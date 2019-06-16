@@ -2,7 +2,7 @@ import React from 'react';
 import './GameNav.scss';
 import { tabsInformations } from '../../../js/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
+import { Link, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 
 const GameNav = ({ dataVisibles, pageId }) => {
     console.log(dataVisibles)

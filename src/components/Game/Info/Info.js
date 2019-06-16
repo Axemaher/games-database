@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './Info.scss';
 import { gameCategory, gameStatus } from '../../../js/utils.js'
 

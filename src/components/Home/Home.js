@@ -5,7 +5,7 @@ import Carousel from "../Carousel/Carousel";
 import Loader from '../Loader/Loader';
 import axios from 'axios';
 import './Home.scss';
-import { url, method, headers, topReleases, popular } from '../../js/api';
+import { url, urlFeed, method, headers, topReleases, popular } from '../../js/api';
 
 
 const Home = () => {
@@ -16,10 +16,23 @@ const Home = () => {
 
     useEffect(() => {
         axios({
+            url: urlFeed,
+            method,
+            headers,
+            data: "fields *;"
+        })
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(err => {
+                console.error(err);
+            });
+        axios({
             url, method, headers, data: topReleases
         })
             /// HEADER DATA
             .then(response => {
+                console.log(response.data)
                 let headerData = response.data[Math.floor((Math.random() * response.data.length) + 0)];
                 const { id, cover, name, screenshots, release_dates, involved_companies, websites, rating } = headerData;
                 headerData = {
