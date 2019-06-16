@@ -2,9 +2,9 @@ import React from 'react';
 import './GameNav.scss';
 import { tabsInformations } from '../../../js/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 
-
-const GameNav = ({ dataVisibles, pageId, setPage }) => {
+const GameNav = ({ dataVisibles, pageId }) => {
     console.log(dataVisibles)
 
     const { tabInfo, tabDesc, tabVideo, tabScreen, tabArt } = tabsInformations;
@@ -20,10 +20,17 @@ const GameNav = ({ dataVisibles, pageId, setPage }) => {
 
     navElements = navElements.filter(el => el !== null)
         .map(page => (
-            <li key={page.id} className={pageId === page.id ? "navigation-element navigation-element-active" : "navigation-element"} onClick={() => setPage(page.id)}>
+            <Link
+                to={page.name}
+                spy={true}
+                smooth={true}
+                offset={-50}
+                duration={500}
+                key={page.id}
+                className={pageId === page.id ? "navigation-element navigation-element-active" : "navigation-element"}>
                 <FontAwesomeIcon className="navigation-element__icon" icon={page.icon} />
                 <span className="navigation-element__label">{page.name}</span>
-            </li>
+            </Link>
         ))
 
     return (

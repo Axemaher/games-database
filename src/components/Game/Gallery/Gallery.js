@@ -8,7 +8,6 @@ const Gallery = ({ data, sectionTitle, videoGallery }) => {
     const maxThumbnails = 10;
     let items = [];
     let thumbnails = [];
-    const myRef = React.createRef();
     if (videoGallery) {
         items = data.map(el => <iframe title={el.video_id} className="video-iframe" src={'//www.youtube.com/embed/' + el.video_id} frameBorder="0" allowFullScreen></iframe>);
         data.forEach(function (el) {
@@ -39,24 +38,15 @@ const Gallery = ({ data, sectionTitle, videoGallery }) => {
         setPhotoIndex(index);
         setIsOpen(true);
     }
-    const imageLoaded = index => {
-        thumbnails[index].loaded = true;
-        if (thumbnails.filter(el => el.loaded).length === thumbnails.length) {
-            window.scrollTo({
-                top: myRef.current.offsetTop,
-                behavior: 'smooth',
-            })
-        }
-    }
     return (
         <section className="section section-gallery">
             <h2 className="section-title">{sectionTitle}</h2>
             <div className="gallery-grid">
-                <ul ref={myRef} className="gallery-items-list">
+                <ul className="gallery-items-list">
 
                     {thumbnails.map((item, index) =>
                         <li className={videoGallery ? 'video-container' : "image-container"} key={index}>
-                            <img className={videoGallery ? 'video-item' : "image-item"} src={item.url} alt="screenshot" onClick={() => click(index)} onLoad={() => imageLoaded(index)} />
+                            <img className={videoGallery ? 'video-item' : "image-item"} src={item.url} alt="screenshot" onClick={() => click(index)} />
                             {videoGallery && <span className="video-name">{item.name}</span>}
                         </li>
                     )}

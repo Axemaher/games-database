@@ -3,17 +3,9 @@ import './Desc.scss';
 
 const Desc = ({ summary, storyline, sectionTitle }) => {
 
-    const myRef = React.createRef();
-
-    useEffect(() => {
-        window.scrollTo({
-            top: myRef.current.offsetTop,
-            behavior: 'smooth',
-        })
-    }, [myRef])
 
     return (
-        <section ref={myRef} className="section section-desc">
+        <section className="section section-desc">
             <h2 className="section-title">{sectionTitle}</h2>
             <div className="description">
                 {summary !== undefined &&

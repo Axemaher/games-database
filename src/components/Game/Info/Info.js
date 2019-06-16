@@ -4,14 +4,6 @@ import { gameCategory, gameStatus } from '../../../js/utils.js'
 
 const Info = ({ data, sectionTitle }) => {
 
-    const myRef = React.createRef();
-
-    useEffect(() => {
-        window.scrollTo({
-            top: myRef.current.offsetTop,
-            behavior: 'smooth',
-        })
-    }, [myRef])
 
     const { themes, genres, game_engines, game_modes, platforms, alternative_names, player_perspectives, status, category } = data;
 
@@ -30,7 +22,7 @@ const Info = ({ data, sectionTitle }) => {
     infoContainerData = infoContainerData.filter(data => data.data !== undefined)
 
     return (
-        <section ref={myRef} className="section section-info">
+        <section className="section section-info">
             <h2 className="section-title">{sectionTitle}</h2>
             <div className="informations">
                 {infoContainerData.map(contData => (

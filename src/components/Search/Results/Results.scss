@@ -27,6 +27,7 @@
     list-style: none;
 }
 .search-result__cover{
+    padding: 2px;
     width: 40px;
     grid-area: cover;
 }
@@ -65,7 +66,7 @@
 .search-result{
     margin-top: 10px;
     min-height: 40px;
-    border-bottom: 1px solid $gray;
+    border-bottom: 1px dashed $gray;
     display: grid;
     grid-template-columns: 40px auto 75px;
      grid-template-rows: auto;

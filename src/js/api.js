@@ -23,7 +23,7 @@ sort popularity desc;`;
 export const popular = `limit 8;
 fields id, name, screenshots.image_id, summary, rating, release_dates.human, themes.name;
 where aggregated_rating > 80 & pulse_count > 30 & screenshots > 0 & release_dates != null & themes != 42;
-sort pulse_count desc;`;
+sort popularity desc;`;
 
 export const gameById = `fields *, 
 alternative_names.*, 

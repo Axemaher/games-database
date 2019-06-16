@@ -16,7 +16,11 @@
     padding: 5px;
     margin: 0 auto 20px auto;
   }
+  .game-info__releasing-date{
+    padding-right: 16px;
+  }
   .card-grid-item__description{
+    width: 100%;
     overflow: hidden;
     position: relative; 
     line-height: 1.2em;

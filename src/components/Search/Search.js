@@ -107,9 +107,8 @@ const Search = () => {
             title: "Themes"
         },
     ]
-    // console.log(xplatformFilterQuery)
     return (
-        <main className="main">
+        <main className="main main-search">
             <div className="searching">
                 <form onSubmit={handleSubmit}>
                     <div className="searching-container">
@@ -141,7 +140,7 @@ const Search = () => {
                     </div>
                 </form>
             </div>
-            {data === null ? <Loader /> : <Results data={data} searchValue={searchValue} />}
+            {data !== null && <Results data={data} searchValue={searchValue} />}
         </main>
     );
 }

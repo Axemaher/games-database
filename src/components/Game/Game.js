@@ -8,6 +8,8 @@ import Desc from './Desc/Desc';
 import Carousel from '../Carousel/Carousel';
 import { tabsInformations } from '../../js/utils';
 import Loader from '../Loader/Loader';
+import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
+
 
 
 // import gameData from '../../js/gameData';
@@ -16,7 +18,6 @@ import { url, method, headers, gameById } from '../../js/api';
 
 const Game = ({ match }) => {
 
-    const [page, setPage] = useState(null);
     const [dataHeader, setDataHeader] = useState(null);
     const [tabsVisibles, setTabsVisibles] = useState(null);
     const [dataTabs, setDataTabs] = useState(null);
@@ -97,9 +98,6 @@ const Game = ({ match }) => {
             top: 0,
             behavior: 'smooth',
         });
-
-        setPage(null);
-
     }, [match.params.id])
 
     const { tabInfo, tabDesc, tabVideo, tabScreen, tabArt } = tabsInformations;
@@ -113,38 +111,46 @@ const Game = ({ match }) => {
                 {tabsVisibles === null || tabsVisibles.length === 0 ? "" :
                     <GameNav
                         dataVisibles={tabsVisibles}
-                        pageId={page}
-                        setPage={setPage}
                     />}
-                {page === tabInfo.id &&
-                    <Info
-                        data={dataTabs.informations}
-                        sectionTitle={tabInfo.name}
-                    />}
-                {page === tabDesc.id &&
-                    <Desc
-                        summary={dataTabs.description.summary}
-                        storyline={dataTabs.description.storyline}
-                        sectionTitle={tabDesc.name}
-                    />}
-                {page === tabVideo.id &&
-                    <Gallery
-                        data={dataTabs.videos}
-                        sectionTitle={tabVideo.name}
-                        videoGallery={true}
-                    />}
-                {page === tabScreen.id &&
-                    <Gallery
-                        data={dataTabs.screenshots}
-                        sectionTitle={tabScreen.name}
-                        videoGallery={false}
-                    />}
-                {page === tabArt.id &&
-                    <Gallery
-                        data={dataTabs.artworks}
-                        sectionTitle={tabArt.name}
-                        videoGallery={false}
-                    />}
+                {dataTabs &&
+
+                    <Element name={tabInfo.name}>
+                        <Info
+                            data={dataTabs.informations}
+                            sectionTitle={tabInfo.name}
+                        />
+                    </Element>}
+                {dataTabs && dataTabs.description &&
+                    <Element name={tabDesc.name}>
+                        <Desc
+                            summary={dataTabs.description.summary}
+                            storyline={dataTabs.description.storyline}
+                            sectionTitle={tabDesc.name}
+                        />
+                    </Element>}
+                {dataTabs && dataTabs.videos &&
+                    <Element name={tabVideo.name}>
+                        <Gallery
+                            data={dataTabs.videos}
+                            sectionTitle={tabVideo.name}
+                            videoGallery={true}
+                        /></Element>}
+                {dataTabs && dataTabs.screenshots &&
+                    <Element name={tabScreen.name}>
+                        <Gallery
+                            data={dataTabs.screenshots}
+                            sectionTitle={tabScreen.name}
+                            videoGallery={false}
+                        />
+                    </Element>}
+                {dataTabs && dataTabs.artworks &&
+                    <Element name={tabArt.name}>
+                        <Gallery
+                            data={dataTabs.artworks}
+                            sectionTitle={tabArt.name}
+                            videoGallery={false}
+                        />
+                    </Element>}
                 {similarGames === null ? "" :
                     <Carousel
                         data={similarGames}
