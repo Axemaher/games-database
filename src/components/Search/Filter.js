@@ -25,7 +25,7 @@ const Filter = ({ data, getQuery, queryStart, title }) => {
     }
     const [showAll, setShowMore] = useState(false);
     return (
-        <div>
+        <section>
             <span className="filter-list-title">{title}</span>
             <ul className="filter-list">
                 {
@@ -59,7 +59,7 @@ const Filter = ({ data, getQuery, queryStart, title }) => {
                 >{showAll ? "show less" : `show more (${checkedItems.length - shortListCount})`}
                 </span>
             }
-        </div>
+        </section>
     );
 }
 

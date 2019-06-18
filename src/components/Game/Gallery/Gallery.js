@@ -43,7 +43,6 @@ const Gallery = ({ data, sectionTitle, videoGallery }) => {
             <h2 className="section-title">{sectionTitle}</h2>
             <div className="gallery-grid">
                 <ul className="gallery-items-list">
-
                     {thumbnails.map((item, index) =>
                         <li className={videoGallery ? 'video-container' : "image-container"} key={index}>
                             <img className={videoGallery ? 'video-item' : "image-item"} src={item.url} alt="screenshot" onClick={() => click(index)} />

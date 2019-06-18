@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 const Results = ({ data, searchValue }) => {
     console.log(data)
     return (
-        <div className="search-results">
+        <section className="search-results">
             <p className="search-result-label">Search results ({data.length}) for <b>{searchValue}</b></p>
             <ul className="search-results-list">
                 {data.map(el =>
@@ -34,7 +34,7 @@ const Results = ({ data, searchValue }) => {
                     </li>
                 )}
             </ul>
-        </div>
+        </section>
     );
 }
 

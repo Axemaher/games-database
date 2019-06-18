@@ -17,7 +17,7 @@ export const headers = {
     'user-key': API_KEY,
 };
 
-export const topReleases = `limit 16;
+export const topReleases = `limit 8;
 fields cover.image_id, name, screenshots.image_id, rating, release_dates.human, websites.category, websites.url, involved_companies.company.name, themes.name;
 where first_release_date > ${dateNow} & first_release_date < ${dateNow + 2419200} & screenshots > 0 & cover != null & involved_companies.company.name != null;
 sort popularity desc;`;
@@ -51,7 +51,12 @@ websites.*`
 
 export const search = `fields *; where platform = ();`
 
-
+export const feed = `limit 6; 
+fields *, pulse.*, pulse.website.*; 
+where pulse != null 
+& pulse.image != null
+& pulse.author != null; 
+sort created_at desc;`;
 
 
 // age_ratings	Reference ID for Age Rating	The PEGI rating

@@ -4,29 +4,31 @@
     width: 1200px;
     flex-direction: column;
     margin: 0 auto; 
+    @media screen and (max-width: 1200px) {
+      width: 100%;
+    }
   }
+
   .carousel-item{
     width: 100px;
     height: 100px;
     margin: 10px auto 80px auto;
     list-style: none;
     text-align: center;
-    .carousel-item-href{
-      text-decoration: none;
-      color: $primary-font;
-    }
-    .carousel-item__image{
-      height: 100%;
-      background-size: cover;
-      background-position-x: center;
-    }
-    .carousel-item__name{
-      padding-top: 6px;
-      font-size: 12px;
-    }
   }
-  @media screen and (max-width: 1200px) {
-    .section-carousel {
-      width: 100%;
-    }
+
+  .carousel-item-link{
+    text-decoration: none;
+    color: $primary-font;
+  }
+
+  .carousel-item-link__image{
+    height: 100%;
+    background-size: cover;
+    background-position-x: center;
+  }
+  
+  .carousel-item-link__name{
+    padding-top: 6px;
+    font-size: 12px;
   }

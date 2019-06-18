@@ -7,21 +7,21 @@ const Desc = ({ summary, storyline, sectionTitle }) => {
     return (
         <section className="section section-desc">
             <h2 className="section-title">{sectionTitle}</h2>
-            <div className="description">
+            <section className="description">
                 {summary !== undefined &&
-                    <div className="description-container">
-                        <p className="description-category">Specification:</p>
+                    <article className="description-container">
+                        <h3 className="description-category">Specification:</h3>
                         <p className="description-content">{summary}</p>
-                    </div>
+                    </article>
                 }
                 {storyline !== undefined &&
-                    <div className="description-container">
-                        <p className="description-category">Storyline:</p>
+                    <article className="description-container">
+                        <h3 className="description-category">Storyline:</h3>
                         <p className="description-content">{storyline}
                         </p>
-                    </div>
+                    </article>
                 }
-            </div>
+            </section>
         </section>
     );
 }

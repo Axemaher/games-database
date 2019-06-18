@@ -22,7 +22,7 @@ const GameHeader = ({ data, gameNameBefore }) => {
             <div className="header-informations">
                 <div className="informations-row">
                     <div className="name-and-rating">
-                        <Link className={`game-name ${gameNameBefore && 'game-name-before'} `} to={`/game/${id}`}>{name}</Link>
+                        <Link className={`game-link ${gameNameBefore && 'game-name-before'} `} to={`/game/${id}`}><h3 className="game-name">{name}</h3></Link>
                         {rating && <RatingStars data={rating} />}
                         {!rating && <p className="release-date">{releaseDate}</p>}
                     </div>

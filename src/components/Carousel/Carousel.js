@@ -7,12 +7,12 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const Carousel = ({ data, sectionTitle }) => {
     const slidesData = data.map((item, index) => (
-        <div key={index} className="carousel-item">
-            <Link to={`/game/${item.id}`} className="carousel-item-href">
-                <div className="carousel-item__image" style={{ backgroundImage: `url(//images.igdb.com/igdb/image/upload/t_cover_big/${item.cover}.jpg)` }}></div>
-                <p className="carousel-item__name">{item.name}</p>
+        <article key={index} className="carousel-item">
+            <Link to={`/game/${item.id}`} className="carousel-item-link">
+                <div className="carousel-item-link__image" style={{ backgroundImage: `url(//images.igdb.com/igdb/image/upload/t_cover_big/${item.cover}.jpg)` }}></div>
+                <h3 className="carousel-item-link__name">{item.name}</h3>
             </Link>
-        </div>
+        </article>
     ));
 
 

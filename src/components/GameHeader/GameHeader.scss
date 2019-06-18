@@ -23,11 +23,13 @@
     justify-content: space-between;
     align-items: center;
   }
-  
+  .game-link{
+    color: $primary-font;
+    text-decoration: none;
+  }
   .game-name {
     font-weight: bold;
     font-size: 36px;
-    color: $primary-font;
     margin-right: 30px;
     position: relative;
   }

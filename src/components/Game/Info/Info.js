@@ -24,7 +24,7 @@ const Info = ({ data, sectionTitle }) => {
     return (
         <section className="section section-info">
             <h2 className="section-title">{sectionTitle}</h2>
-            <div className="informations">
+            <section className="informations">
                 {infoContainerData.map(contData => (
                     <InformationContainer
                         key={contData.id}
@@ -32,7 +32,7 @@ const Info = ({ data, sectionTitle }) => {
                         dataNames={contData.data.map(el => el.name)}
                     />
                 ))}
-            </div>
+            </section>
 
         </section>
     );
@@ -40,12 +40,12 @@ const Info = ({ data, sectionTitle }) => {
 
 const InformationContainer = ({ label, dataNames }) => {
     return (
-        <div className="information-container">
-            <p className="information-category">{label}:</p>
+        <article className="information-container">
+            <h3 className="information-category">{label}:</h3>
             <ul>
                 {dataNames.map((el, index) => <li key={index} >{el}</li>)}
             </ul>
-        </div>
+        </article>
     )
 }
 

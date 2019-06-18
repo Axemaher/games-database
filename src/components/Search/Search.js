@@ -117,7 +117,7 @@ const Search = () => {
     ]
     return (
         <main className="main main-search">
-            <div className="searching">
+            <section className="searching">
                 <form onSubmit={handleSubmit}>
                     <div className="searching-container">
                         <label htmlFor="searchInput"></label>
@@ -159,7 +159,7 @@ const Search = () => {
 
                     </div>
                 </form>
-            </div>
+            </section>
             {data !== null && <Results data={data} searchValue={searchValue} />}
         </main>
     );

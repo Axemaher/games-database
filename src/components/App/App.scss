@@ -1,25 +1,26 @@
 @import "../variables.scss";
 .header {
     width: 1400px;
-    .nav-group{
-      display: flex;
-      justify-content: space-between;
-      padding: 20px;
-      list-style: none;
-      .home-btn{
-        color: $primary-font;
-        font-weight: bold;
-        text-decoration: none;
-      }
-      .search-btn{
-        text-decoration: none;
-    cursor: pointer;
-    color: black;
-      }
-    }
-  }
-  @media screen and (max-width: 1400px) {
-    .header{
+    @media screen and (max-width: 1400px) {
       width: 100%;
     }
   }
+  .logo{
+    font-size: 16px;
+  }
+.nav-group{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  list-style: none;
+  }
+.home-btn{
+  color: $primary-font;
+  font-weight: bold;
+  text-decoration: none;
+}
+.search-btn{
+  text-decoration: none;
+  cursor: pointer;
+  color: $primary-font;
+}

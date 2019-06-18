@@ -14,7 +14,7 @@ const App = () => {
           <nav>
             <ul className="nav-group">
               <li className="nav-element">
-                <Link to="/" className="home-btn">GAMES DATABASE</Link>
+                <Link to="/" className="home-btn"><h1 className="logo" >GAMES DATABASE</h1></Link>
               </li>
               <li className="nav-element">
                 <Link className="search-btn" to="/search">SEARCH <FontAwesomeIcon icon="search" /></Link>
