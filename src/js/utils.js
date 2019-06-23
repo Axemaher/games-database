@@ -63,7 +63,8 @@ export const tabsInformations = {
     tabDesc: { name: "Description", icon: "list", id: 2 },
     tabVideo: { name: "Videos", icon: "video", id: 3 },
     tabScreen: { name: "Screenshots", icon: "desktop", id: 4 },
-    tabArt: { name: "Artworks", icon: "pencil-ruler", id: 5 }
+    tabArt: { name: "Artworks", icon: "pencil-ruler", id: 5 },
+    tabPulses: { name: "Pulses", icon: "newspaper", id: 6 },
 }
 
 export default websitesIcons;

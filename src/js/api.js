@@ -1,6 +1,7 @@
 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-const targetUrl = "https://api-v3.igdb.com/games";
-const feeds = "https://api-v3.igdb.com/feeds";
+const mainAdress = "https://api-v3.igdb.com/games";
+const pulseGroupsAdress = "https://api-v3.igdb.com/pulse_groups";
+const feedsAdress = "https://api-v3.igdb.com/feeds";
 const API_KEY = '6e25c84bd2fd1f90934ea9083acd98d6';
 
 // axemaher: 6e25c84bd2fd1f90934ea9083acd98d6
@@ -9,8 +10,9 @@ const API_KEY = '6e25c84bd2fd1f90934ea9083acd98d6';
 const dateNow = Math.round((new Date()).getTime() / 1000);
 
 
-export const url = `${proxyUrl}${targetUrl}`;
-export const urlFeed = `${proxyUrl}${feeds}`;
+export const url = `${proxyUrl}${mainAdress}`;
+export const urlFeed = `${proxyUrl}${feedsAdress}`;
+export const urlPulses = `${proxyUrl}${pulseGroupsAdress}`;
 export const method = 'POST';
 export const headers = {
     'Accept': 'application/json',
@@ -57,6 +59,9 @@ where pulse != null
 & pulse.image != null
 & pulse.author != null; 
 sort created_at desc;`;
+
+export const pulses = `limit 6; 
+fields *, pulses.*, pulses.website.*;`;
 
 
 // age_ratings	Reference ID for Age Rating	The PEGI rating

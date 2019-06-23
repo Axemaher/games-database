@@ -17,7 +17,7 @@ const GameHeader = ({ data, gameNameBefore }) => {
             className="section game-header"
             style={{ backgroundImage: `url(${backgroundUrl})` }}>
             <div className="cover">
-                <img src={coverUrl} alt="" className="game-cover" />
+                {cover !== null && <img src={coverUrl} alt="" className="game-cover" />}
             </div>
             <div className="header-informations">
                 <div className="informations-row">

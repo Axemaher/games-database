@@ -30,7 +30,7 @@ const Search = () => {
             const query = `
             fields *, cover.*, platforms.*;
             search "${searchValue}";
-            where cover != null
+            where name != null
             ${platformFilterResult}
             ${gameModesFilterResult}
             ${perspecivesFilterResult}

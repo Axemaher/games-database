@@ -12,7 +12,7 @@ const Results = ({ data, searchValue }) => {
             <ul className="search-results-list">
                 {data.map(el =>
                     <li key={el.id} className="search-result">
-                        <img className="search-result__cover" src={`//images.igdb.com/igdb/image/upload/t_cover_big/${el.cover.image_id}.jpg`} alt="" />
+                        <img className="search-result__cover" src={el.cover !== undefined ? `//images.igdb.com/igdb/image/upload/t_cover_big/${el.cover.image_id}.jpg` : ""} alt="" />
                         <Link
                             className="search-result__game-name"
                             to={`/game/${el.id}`}>{el.name}</Link>

@@ -6,15 +6,17 @@ import GameNav from './GameNav/GameNav';
 import Info from './Info/Info';
 import Desc from './Desc/Desc';
 import Carousel from '../Carousel/Carousel';
+import Articles from '../Articles/Articles';
 import { tabsInformations } from '../../js/utils';
 import Loader from '../Loader/Loader';
+import moment from 'moment';
 import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 
 
 
 // import gameData from '../../js/gameData';
 
-import { url, method, headers, gameById } from '../../js/api';
+import { url, urlPulses, method, headers, gameById, pulses } from '../../js/api';
 
 const Game = ({ match }) => {
 
@@ -22,6 +24,8 @@ const Game = ({ match }) => {
     const [tabsVisibles, setTabsVisibles] = useState(null);
     const [dataTabs, setDataTabs] = useState(null);
     const [similarGames, setSimilarGames] = useState(null);
+    const [dataPulses, setDataPulses] = useState(null);
+
 
     useEffect(() => {
         const getData = () => {
@@ -31,11 +35,10 @@ const Game = ({ match }) => {
                 /// HEADER DATA
                 .then(response => {
                     let dataHeader = response.data[0];
-                    console.log(response.data[0])
                     const { id, cover, name, screenshots, release_dates, involved_companies, websites, rating } = dataHeader;
                     dataHeader = {
                         id,
-                        cover: cover.image_id,
+                        cover: cover === undefined ? null : cover.image_id,
                         name,
                         screenshots,
                         release_date: (release_dates === undefined ? undefined : release_dates[0].human),
@@ -79,7 +82,7 @@ const Game = ({ match }) => {
                 })
                 /// SIMILAR GAMES DATA
                 .then(response => {
-                    let similarGames = response.data[0].similar_games;
+                    let similarGames = response.data[0].similar_games || [];
                     similarGames = similarGames.filter(el => el.cover !== undefined)
                         .map(function (el) {
                             return {
@@ -89,6 +92,29 @@ const Game = ({ match }) => {
                             }
                         })
                     setSimilarGames(similarGames);
+                })
+                .catch(err => console.error(err));
+
+            // PULSES
+            axios({
+                url: urlPulses, method, headers, data: `${pulses} where game = ${match.params.id} & pulses.image != null;`
+            })
+                .then(response => {
+                    console.log(response.data);
+                    const pulsesData = response.data.map(function (el) {
+                        const { created_at, id } = el;
+                        const { website, author, image, title, summary } = el.pulses[0];
+                        return {
+                            created: moment().calendar(moment.unix(created_at)),
+                            url: website.url,
+                            author,
+                            image,
+                            title,
+                            summary,
+                            id
+                        }
+                    })
+                    setDataPulses(pulsesData)
                 })
                 .catch(err => console.error(err));
         }
@@ -151,6 +177,12 @@ const Game = ({ match }) => {
                             videoGallery={false}
                         />
                     </Element>}
+
+                {dataPulses === null ? "" :
+                    <Articles
+                        data={dataPulses}
+                        sectionTitle="Articles"
+                    />}
                 {similarGames === null ? "" :
                     <Carousel
                         data={similarGames}

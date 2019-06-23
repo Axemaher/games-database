@@ -7,15 +7,16 @@ import { Link, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll
 const GameNav = ({ dataVisibles, pageId }) => {
     console.log(dataVisibles)
 
-    const { tabInfo, tabDesc, tabVideo, tabScreen, tabArt } = tabsInformations;
-    const { informations, description, videos, screenshots, artworks } = dataVisibles;
+    const { tabInfo, tabDesc, tabVideo, tabScreen, tabArt, tabPulses } = tabsInformations;
+    const { informations, description, videos, screenshots, artworks, pulses } = dataVisibles;
 
     let navElements = [
         informations && tabInfo,
         description ? tabDesc : null,
         videos ? tabVideo : null,
         screenshots ? tabScreen : null,
-        artworks ? tabArt : null
+        artworks ? tabArt : null,
+        pulses ? tabPulses : null
     ];
 
     navElements = navElements.filter(el => el !== null)
