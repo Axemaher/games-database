@@ -100,15 +100,16 @@ const Game = ({ match }) => {
                 url: urlPulses, method, headers, data: `${pulses} where game = ${match.params.id} & pulses.image != null;`
             })
                 .then(response => {
-                    console.log(response.data);
                     const pulsesData = response.data.map(function (el) {
+                        console.log(response.data)
                         const { created_at, id } = el;
-                        const { website, author, image, title, summary } = el.pulses[0];
+                        const { website, author, title, summary } = el.pulses[0];
+                        const filteredImages = el.pulses.filter(el => el.image !== undefined);
                         return {
                             created: moment().calendar(moment.unix(created_at)),
                             url: website.url,
                             author,
-                            image,
+                            image: filteredImages[0].image,
                             title,
                             summary,
                             id

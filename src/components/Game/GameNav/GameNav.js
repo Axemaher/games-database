@@ -16,7 +16,6 @@ const GameNav = ({ dataVisibles, pageId }) => {
         videos ? tabVideo : null,
         screenshots ? tabScreen : null,
         artworks ? tabArt : null,
-        pulses ? tabPulses : null
     ];
 
     navElements = navElements.filter(el => el !== null)

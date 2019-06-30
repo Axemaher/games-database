@@ -8,6 +8,10 @@
   .logo{
     font-size: 16px;
   }
+  .nav{
+    display: flex;
+    justify-content: space-between;
+  }
 .nav-group{
   display: flex;
   justify-content: space-between;
@@ -19,7 +23,8 @@
   font-weight: bold;
   text-decoration: none;
 }
-.search-btn{
+.nav-btn{
+  padding: 10px 0 10px 10px;
   text-decoration: none;
   cursor: pointer;
   color: $primary-font;

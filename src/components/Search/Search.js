@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import './Search.scss';
 import { url, method, headers } from '../../js/api';
@@ -6,10 +6,12 @@ import Filter from './Filter';
 import Results from './Results/Results';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+
+
 import * as filtersData from '../../js/filtersData';
 
 
-const Search = () => {
+const Search = props => {
 
     const [searchValue, setSearchValue] = useState("");
     const [error, setError] = useState(false);
@@ -43,16 +45,15 @@ const Search = () => {
             limit 50;
             `
             axios({
-                // url, method, headers, data: search
                 url, method, headers, data: query
             })
                 .then(response => {
-                    // console.log(response.data)
                     setData(response.data)
                 })
                 .catch(err => console.error(err));
         }
     }
+
 
     const [platformFilterResult, setPlatformFilterResult] = useState("");
     const [gameModesFilterResult, setGameModesFilterResult] = useState("");
