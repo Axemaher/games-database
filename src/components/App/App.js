@@ -5,7 +5,7 @@ import './App.scss';
 import Home from '../Home/Home';
 import Game from "../Game/Game";
 import Search from '../Search/Search';
-import Login from '../Login/Login'
+import Authentication from '../Authentication/Authentication'
 import { UserDataContext } from '../../js/context';
 
 const App = () => {
@@ -38,7 +38,7 @@ const App = () => {
                   <Link className="nav-btn" to="/search"> <FontAwesomeIcon icon="search" /></Link>
                 </li>
                 <li className="nav-element">
-                  <Link className="nav-btn" to="/login"> <FontAwesomeIcon icon={['far', 'user']} /></Link>
+                  <Link className="nav-btn" to="/authentication"> <FontAwesomeIcon icon={['far', 'user']} /></Link>
                 </li>
               </ul>
             </nav>
@@ -50,7 +50,7 @@ const App = () => {
           <Route path="/" exact component={Home} />
           <Route path="/game/:id" component={Game} />
           <Route path="/search" component={Search} />
-          <Route path="/login" component={Login} />
+          <Route path="/authentication" component={Authentication} />
 
 
         </>

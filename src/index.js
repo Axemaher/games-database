@@ -16,7 +16,10 @@ import {
     faPencilRuler,
     faTimes,
     faNewspaper,
-
+    faUserPlus,
+    faEnvelope,
+    faLock,
+    faSignInAlt
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -33,7 +36,11 @@ library.add(
     faNewspaper,
     faUser,
     faFacebookF,
-    faGooglePlusG
+    faGooglePlusG,
+    faUserPlus,
+    faEnvelope,
+    faLock,
+    faSignInAlt
 )
 
 
