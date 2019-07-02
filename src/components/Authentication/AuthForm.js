@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import fbase from '../../js/firebase';
 import firebase from 'firebase';
@@ -22,6 +22,8 @@ const AuthForm = ({ authOptions, authBtnLabel, loginMethod, registerMethod }) =>
 
     const userDataContext = useContext(UserDataContext)
     const { setUserData, userData } = userDataContext;
+    const logged = userDataContext.userData.data.logged;
+
 
     const socialLogin = social => {
         let provider = null;
@@ -33,23 +35,32 @@ const AuthForm = ({ authOptions, authBtnLabel, loginMethod, registerMethod }) =>
                 provider = new firebase.auth.GoogleAuthProvider();
                 break;
         }
-        firebase.auth().signInWithPopup(provider).then(function (result) {
-            const { displayName, email, uid } = result.user;
-            const userData = {
-                logged: true,
-                data: {
-                    displayName,
-                    email,
-                    uid,
-                }
-            };
-            setUserData(userData);
-        }).catch(function (error) {
-            console.log(error);
-        });
+        firebase.auth().signInWithRedirect(provider)
+            .then(() => {
+                return firebase.auth().getRedirectResult();
+            }).catch(error => {
+                console.log(error)
+            });
     }
 
-
+    useEffect(() => {
+        firebase.auth().getRedirectResult()
+            .then(result => {
+                const { displayName, email, uid } = result.user;
+                const userData = {
+                    logged: true,
+                    data: {
+                        displayName,
+                        email,
+                        uid,
+                    }
+                };
+                console.log(userData)
+                setUserData(userData);
+            }).catch(error => {
+                console.log(error)
+            });
+    }, [])
 
     return (
         <>
