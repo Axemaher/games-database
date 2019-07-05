@@ -5,7 +5,7 @@ import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faStar as farStar, faPlayCircle, faUser } from '@fortawesome/free-regular-svg-icons';
-import { faFacebookF, faGooglePlusG } from '@fortawesome/free-brands-svg-icons'
+import { faFacebookF, faGooglePlusG, faGithub } from '@fortawesome/free-brands-svg-icons'
 import {
     faSearch,
     faStar,
@@ -19,7 +19,8 @@ import {
     faUserPlus,
     faEnvelope,
     faLock,
-    faSignInAlt
+    faSignInAlt,
+    faUserCog
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -40,7 +41,9 @@ library.add(
     faUserPlus,
     faEnvelope,
     faLock,
-    faSignInAlt
+    faSignInAlt,
+    faUserCog,
+    faGithub
 )
 
 

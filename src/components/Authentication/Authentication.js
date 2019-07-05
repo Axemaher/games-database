@@ -4,14 +4,14 @@ import { UserDataContext } from '../../js/context';
 import './Authentication.scss';
 import AuthForm from './AuthForm';
 
-const Authentication = () => {
+const Authentication = ({ visibility }) => {
     const [authMetod, setAuthMetod] = useState('login');
 
     const userDataContext = useContext(UserDataContext)
     const logged = userDataContext.userData.logged;
 
     return (
-        <main className="main main-auth" >
+        <div className="main main-auth" style={{ visibility: `${visibility ? 'visible' : 'hidden'}` }}>
             <section className="auth">
                 {!logged &&
                     <div className="auth-container">
@@ -22,14 +22,14 @@ const Authentication = () => {
                                 <FontAwesomeIcon
                                     className="header-btn-icon" icon={['far', 'user']} />
                                 Login
-                        </button>
+                            </button>
                             <button
                                 onClick={() => setAuthMetod('register')}
                                 className={`header-btn ${authMetod === 'register' && ' header-btn--active'}`}>
                                 <FontAwesomeIcon
                                     className="header-btn-icon" icon={['fas', 'user-plus']} />
                                 Register
-                        </button>
+                            </button>
                         </header>
                         {authMetod === 'login' ?
                             <AuthForm
@@ -44,29 +44,8 @@ const Authentication = () => {
                             />
                         }
                     </div>}
-
-
-
-
-                {/* {logged ?
-                    userData.data.displayName :
-                    <div className="social-login">
-                        <button onClick={() => socialLogin('facebook')} className="social-button social-button--facebook">
-                            <FontAwesomeIcon className="social-icon--facebook" icon={['fab', 'facebook-f']} />
-                            <span className="social-text">
-                                Sign in with facebook
-                        </span>
-                        </button>
-                        <button onClick={() => socialLogin('google')} className="social-button social-button--google">
-                            <FontAwesomeIcon className="social-icon--google" icon={['fab', 'google-plus-g']} />
-                            <span className="social-text">
-                                Sign in with google
-                        </span>
-                        </button>
-                    </div>
-                } */}
             </section>
-        </main >
+        </div >
     );
 }
 

@@ -7,8 +7,11 @@ import Game from "../Game/Game";
 import Search from '../Search/Search';
 import Authentication from '../Authentication/Authentication'
 import { UserDataContext } from '../../js/context';
+import User from '../User/User';
 
 const App = () => {
+
+  const [authModal, setAuthModal] = useState(false)
 
   const initialUserData = {
     logged: false,
@@ -20,10 +23,9 @@ const App = () => {
   }
   const [userData, setUserData] = useState(initialUserData);
 
-
   const { Provider } = UserDataContext;
   return (
-    <Provider value={{ userData: userData, setUserData: setUserData }}>
+    <Provider value={{ userData: userData, setUserData: setUserData, setAuthModal: setAuthModal }}>
       <Router>
         <>
           <header className="header">
@@ -35,22 +37,29 @@ const App = () => {
               </ul>
               <ul className="nav-group">
                 <li className="nav-element">
-                  <Link className="nav-btn" to="/search"> <FontAwesomeIcon icon="search" /></Link>
+                  <Link className="nav-btn" to="/search"> <FontAwesomeIcon className="nav-btn-ico" icon="search" /></Link>
                 </li>
                 <li className="nav-element">
-                  <Link className="nav-btn" to="/authentication"> <FontAwesomeIcon icon={['far', 'user']} /></Link>
+                  {userData.logged ?
+                    <Link className="nav-btn" to="/user"> <FontAwesomeIcon icon={['fas', 'user-cog']} /></Link> :
+                    <button
+                      onClick={() => setAuthModal(true)}
+                      className="nav-btn">
+                      <FontAwesomeIcon className="nav-btn-ico" icon={['far', 'user']} />
+                    </button>}
                 </li>
               </ul>
             </nav>
             <div className="search">
               <i className="fas fa-search"></i>
             </div>
+            <Authentication visibility={authModal} />
           </header>
 
           <Route path="/" exact component={Home} />
           <Route path="/game/:id" component={Game} />
           <Route path="/search" component={Search} />
-          <Route path="/authentication" component={Authentication} />
+          <Route path="/user" component={User} />
 
 
         </>

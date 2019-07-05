@@ -15,7 +15,7 @@
 .nav-group{
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  padding: 10px;
   list-style: none;
   }
 .home-btn{
@@ -23,9 +23,25 @@
   font-weight: bold;
   text-decoration: none;
 }
+.nav-element{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .nav-btn{
-  padding: 10px 0 10px 10px;
+  padding: 10px;
+  font-size: 15px;
   text-decoration: none;
   cursor: pointer;
+  background-color: transparent;
+  border: none;
+  color: $primary-font;
+}
+.nav-btn-auth-ico{
+  font-size: 15px;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
   color: $primary-font;
 }

@@ -12,7 +12,46 @@ const AuthForm = ({ authOptions, authBtnLabel, loginMethod, registerMethod }) =>
     });
 
     const handleSubmit = e => {
-        e.preventDefault()
+        e.preventDefault();
+        console.log(registerMethod)
+        if (registerMethod) {
+            firebase.auth().createUserWithEmailAndPassword(inputs.email, inputs.password)
+                .then(result => {
+                    setAuthModal(false)
+                    const { displayName, email, uid } = result.user;
+                    const userData = {
+                        logged: true,
+                        data: {
+                            displayName,
+                            email,
+                            uid,
+                        }
+                    };
+                    setUserData(userData);
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+        }
+        if (loginMethod) {
+            firebase.auth().signInWithEmailAndPassword(inputs.email, inputs.password)
+                .then(result => {
+                    setAuthModal(false)
+                    const { displayName, email, uid } = result.user;
+                    const userData = {
+                        logged: true,
+                        data: {
+                            displayName,
+                            email,
+                            uid,
+                        }
+                    };
+                    setUserData(userData);
+                }).catch(error => {
+                    console.log(error)
+                });
+        }
+
     }
 
     const handleInputChange = (event) => {
@@ -21,7 +60,7 @@ const AuthForm = ({ authOptions, authBtnLabel, loginMethod, registerMethod }) =>
     }
 
     const userDataContext = useContext(UserDataContext)
-    const { setUserData, userData } = userDataContext;
+    const { setAuthModal, setUserData } = userDataContext;
     const logged = userDataContext.userData.data.logged;
 
 
@@ -34,6 +73,9 @@ const AuthForm = ({ authOptions, authBtnLabel, loginMethod, registerMethod }) =>
             case 'google':
                 provider = new firebase.auth.GoogleAuthProvider();
                 break;
+            case 'github':
+                provider = new firebase.auth.GithubAuthProvider();
+                break;
         }
         firebase.auth().signInWithRedirect(provider)
             .then(() => {
@@ -43,24 +85,23 @@ const AuthForm = ({ authOptions, authBtnLabel, loginMethod, registerMethod }) =>
             });
     }
 
-    useEffect(() => {
-        firebase.auth().getRedirectResult()
-            .then(result => {
-                const { displayName, email, uid } = result.user;
-                const userData = {
-                    logged: true,
-                    data: {
-                        displayName,
-                        email,
-                        uid,
-                    }
-                };
-                console.log(userData)
-                setUserData(userData);
-            }).catch(error => {
-                console.log(error)
-            });
-    }, [])
+    firebase.auth().getRedirectResult()
+        .then(result => {
+            const { displayName, email, uid } = result.user;
+            const userData = {
+                logged: true,
+                data: {
+                    displayName,
+                    email,
+                    uid,
+                }
+            };
+            console.log(userData)
+            setUserData(userData);
+        }).catch(error => {
+            console.log(error)
+        });
+
 
     return (
         <>
@@ -93,7 +134,7 @@ const AuthForm = ({ authOptions, authBtnLabel, loginMethod, registerMethod }) =>
                         required
                     />
                 </div>
-                <button type="button" className="auth-btn">
+                <button type="submit" className="auth-btn">
                     <FontAwesomeIcon className="submit-icon" icon={['fas', 'sign-in-alt']} />{authBtnLabel}</button>
             </form>
             <section className="social-auth-section">
@@ -108,6 +149,11 @@ const AuthForm = ({ authOptions, authBtnLabel, loginMethod, registerMethod }) =>
                         onClick={() => socialLogin('facebook')}
                         className="social-option-btn">
                         <FontAwesomeIcon className="social-icon-facebook" icon={['fab', 'facebook-f']} />
+                    </button>
+                    <button
+                        onClick={() => socialLogin('github')}
+                        className="social-option-btn">
+                        <FontAwesomeIcon className="social-icon-github" icon={['fab', 'github']} />
                     </button>
                 </div>
             </section>
