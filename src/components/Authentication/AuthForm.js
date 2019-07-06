@@ -11,12 +11,18 @@ const AuthForm = ({ authOptions, authBtnLabel, loginMethod, registerMethod }) =>
         password: ""
     });
 
+
     const handleSubmit = e => {
         e.preventDefault();
         console.log(registerMethod)
         if (registerMethod) {
             firebase.auth().createUserWithEmailAndPassword(inputs.email, inputs.password)
                 .then(result => {
+                    setInfoModal({
+                        visible: true,
+                        error: false,
+                        content: "logged in successfully"
+                    })
                     setAuthModal(false)
                     const { displayName, email, uid } = result.user;
                     const userData = {
@@ -30,12 +36,21 @@ const AuthForm = ({ authOptions, authBtnLabel, loginMethod, registerMethod }) =>
                     setUserData(userData);
                 })
                 .catch(error => {
-                    console.log(error)
+                    setInfoModal({
+                        visible: true,
+                        error: true,
+                        content: "the email address is already in use by another account"
+                    })
                 });
         }
         if (loginMethod) {
             firebase.auth().signInWithEmailAndPassword(inputs.email, inputs.password)
                 .then(result => {
+                    setInfoModal({
+                        visible: true,
+                        error: false,
+                        content: "logged in successfully"
+                    })
                     setAuthModal(false)
                     const { displayName, email, uid } = result.user;
                     const userData = {
@@ -48,7 +63,11 @@ const AuthForm = ({ authOptions, authBtnLabel, loginMethod, registerMethod }) =>
                     };
                     setUserData(userData);
                 }).catch(error => {
-                    console.log(error)
+                    setInfoModal({
+                        visible: true,
+                        error: true,
+                        content: "the password is invalid or the user does not exist"
+                    })
                 });
         }
 
@@ -60,7 +79,7 @@ const AuthForm = ({ authOptions, authBtnLabel, loginMethod, registerMethod }) =>
     }
 
     const userDataContext = useContext(UserDataContext)
-    const { setAuthModal, setUserData } = userDataContext;
+    const { setAuthModal, setUserData, setInfoModal } = userDataContext;
     const logged = userDataContext.userData.data.logged;
 
 
@@ -81,26 +100,43 @@ const AuthForm = ({ authOptions, authBtnLabel, loginMethod, registerMethod }) =>
             .then(() => {
                 return firebase.auth().getRedirectResult();
             }).catch(error => {
-                console.log(error)
+                setInfoModal({
+                    visible: true,
+                    error: true,
+                    content: "authentication error"
+                })
             });
     }
 
-    firebase.auth().getRedirectResult()
-        .then(result => {
-            const { displayName, email, uid } = result.user;
-            const userData = {
-                logged: true,
-                data: {
-                    displayName,
-                    email,
-                    uid,
+    useEffect(() => {
+        firebase.auth().getRedirectResult()
+            .then(result => {
+                const { displayName, email, uid } = result.user;
+                const userData = {
+                    logged: true,
+                    data: {
+                        displayName,
+                        email,
+                        uid,
+                    }
+                };
+                setInfoModal({
+                    visible: true,
+                    error: false,
+                    content: "logged in successfully"
+                })
+                setUserData(userData);
+            }).catch(err => {
+                console.log(err)
+                if (err.code === 'auth/account-exists-with-different-credential') {
+                    setInfoModal({
+                        visible: true,
+                        error: true,
+                        content: "an account already exists associated with this email address"
+                    })
                 }
-            };
-            console.log(userData)
-            setUserData(userData);
-        }).catch(error => {
-            console.log(error)
-        });
+            });
+    }, [])
 
 
     return (

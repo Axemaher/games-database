@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './App.scss';
@@ -8,10 +8,19 @@ import Search from '../Search/Search';
 import Authentication from '../Authentication/Authentication'
 import { UserDataContext } from '../../js/context';
 import User from '../User/User';
+import InfoModal from '../InfoModal/InfoModal';
 
 const App = () => {
 
-  const [authModal, setAuthModal] = useState(false)
+
+
+  // IN CONTEXT
+  const [authModal, setAuthModal] = useState(false);
+  const [infoModal, setInfoModal] = useState({
+    visible: false,
+    error: false,
+    content: ""
+  });
 
   const initialUserData = {
     logged: false,
@@ -25,7 +34,7 @@ const App = () => {
 
   const { Provider } = UserDataContext;
   return (
-    <Provider value={{ userData: userData, setUserData: setUserData, setAuthModal: setAuthModal }}>
+    <Provider value={{ userData, setUserData, setAuthModal, setInfoModal }}>
       <Router>
         <>
           <header className="header">
@@ -54,6 +63,13 @@ const App = () => {
               <i className="fas fa-search"></i>
             </div>
             <Authentication visibility={authModal} />
+            {
+              infoModal.visible &&
+              <InfoModal
+                content={infoModal.content}
+                error={infoModal.error}
+              />
+            }
           </header>
 
           <Route path="/" exact component={Home} />

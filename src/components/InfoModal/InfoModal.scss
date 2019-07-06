@@ -1,0 +1,36 @@
+@import "../variables.scss";
+$header-background: #1096b5;
+$button-active: rgb(0, 193, 201);
+$inputs: rgb(142,149,159);
+$font: white;
+
+.info-modal-container{
+
+    @media screen and (max-width: 1400px) {
+      width: 100%;
+    }
+}
+
+.info-modal {
+  position: fixed;
+  z-index: 2;
+  right: 0;
+  top: 40px;
+  padding: 15px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 16px;
+  background-color: white;
+
+}
+.info-modal-error{
+    color: red;
+}
+.info-modal-success{
+    color: green;
+}
+.info-modal-ico{
+    font-size: 30px;
+    margin-right: 10px;
+}
