@@ -8,7 +8,9 @@ const Authentication = ({ visibility }) => {
     const [authMetod, setAuthMetod] = useState('login');
 
     const userDataContext = useContext(UserDataContext)
-    const logged = userDataContext.userData.logged;
+    const { logged } = userDataContext.userData;
+    const { setAuthModal } = userDataContext;
+
 
     return (
         <div className="main main-auth" style={{ visibility: `${visibility ? 'visible' : 'hidden'}` }}>
@@ -43,6 +45,7 @@ const Authentication = ({ visibility }) => {
                                 authOptions={false}
                             />
                         }
+                        <FontAwesomeIcon onClick={() => setAuthModal(false)} className="close-ico" icon="times" />
                     </div>}
             </section>
         </div >

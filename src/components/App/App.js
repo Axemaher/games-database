@@ -25,9 +25,9 @@ const App = () => {
   const initialUserData = {
     logged: false,
     data: {
-      displayName: "War",
-      uid: "sdhfiushdfiu34u5h34",
-      watchedId: "122"
+      displayName: "",
+      uid: "",
+      watchedId: ""
     }
   }
   const [userData, setUserData] = useState(initialUserData);
@@ -62,7 +62,9 @@ const App = () => {
             <div className="search">
               <i className="fas fa-search"></i>
             </div>
-            <Authentication visibility={authModal} />
+            {!userData.logged &&
+              <Authentication visibility={authModal} />
+            }
             {
               infoModal.visible &&
               <InfoModal

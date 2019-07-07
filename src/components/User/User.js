@@ -3,10 +3,13 @@ import { UserDataContext } from '../../js/context';
 
 const User = () => {
 
-    const userDataContext = useContext(UserDataContext)
-    const userEmail = userDataContext.userData.data.email
+    const userDataContext = useContext(UserDataContext);
+    const { email, displayName, uid } = userDataContext.userData.data;
+
     return (
-        <span>{userEmail}</span>
+        <span>
+            {email}
+        </span>
     );
 }
 

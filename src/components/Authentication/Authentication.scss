@@ -172,3 +172,11 @@ $font: white;
     color: $button-active;
   }
 }
+
+.close-ico{
+  position: absolute;
+  bottom: 0;
+  right: 4px;
+  font-size: 30px;
+  color: red;
+}
