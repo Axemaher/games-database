@@ -12,6 +12,30 @@
     position: relative;
   }
   
+  .watch-btn{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background-color: white;
+    border-radius: 50%;
+    padding: 7px;
+  }
+
+  .watch-ico{
+    font-size: 30px;
+    color: white;
+  }
+  .watch-ico--watched{
+    color: $secondary-font;
+  }
+
+  .watch-ico--not-watched{
+    color: #cccccc;
+  }
+
   .header-informations {
     width: 1200px;
     position: absolute;

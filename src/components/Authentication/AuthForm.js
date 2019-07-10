@@ -54,16 +54,12 @@ const AuthForm = ({ authOptions, authBtnLabel, loginMethod, registerMethod }) =>
             })
 
         // if user is not in database add new user to database
-        if (!uidExist(uid)) {
+        if (uidExist(uid)) {
             firebase.database().ref('users/' + uid).set({
                 displayName,
                 email,
                 uid,
-                watchedGamesId: [
-                    12344,
-                    234235,
-                    34345345,
-                ]
+                watchedGamesId: ['asn', 'ddd']
             });
         }
 
