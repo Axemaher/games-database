@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './App.scss';
 import Home from '../Home/Home';
@@ -9,9 +9,18 @@ import Authentication from '../Authentication/Authentication'
 import { UserDataContext } from '../../js/context';
 import User from '../User/User';
 import InfoModal from '../InfoModal/InfoModal';
+import firebase from 'firebase';
+
+const initialUserData = {
+  logged: false,
+  data: {
+    displayName: "",
+    uid: "",
+    watchedId: ""
+  }
+}
 
 const App = () => {
-
 
 
   // IN CONTEXT
@@ -22,17 +31,56 @@ const App = () => {
     content: ""
   });
 
-  const initialUserData = {
-    logged: false,
-    data: {
-      displayName: "",
-      uid: "",
-      watchedId: ""
-    }
-  }
+
   const [userData, setUserData] = useState(initialUserData);
 
   const { Provider } = UserDataContext;
+
+  // checking logged user
+  useEffect(() => {
+
+    firebase.auth().onAuthStateChanged(user => {
+      if (user !== null) {
+        const { displayName, email, uid } = user;
+        firebase.database().ref('/users/' + user.uid)
+          .once('value')
+          .then(result => {
+            if (result.val() !== null) {
+              const { watchedGamesId } = result.val();
+              setUserData({
+                logged: true,
+                data: {
+                  displayName,
+                  email,
+                  uid,
+                  watchedGamesId
+                }
+              });
+            }
+          })
+      }
+    });
+  }, [])
+
+
+
+  const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route
+      {...rest}
+      render={props =>
+        userData.logged ? (
+          <Component {...props} />
+        ) : (
+            <Redirect
+              to={{
+                pathname: "/",
+              }}
+            />
+          )
+      }
+    />
+  );
+
   return (
     <Provider value={{ userData, setUserData, setAuthModal, setInfoModal }}>
       <Router>
@@ -77,8 +125,7 @@ const App = () => {
           <Route path="/" exact component={Home} />
           <Route path="/game/:id" component={Game} />
           <Route path="/search" component={Search} />
-          <Route path="/user" component={User} />
-
+          <PrivateRoute path="/user" component={User} />
 
         </>
       </Router>

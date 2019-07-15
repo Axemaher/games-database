@@ -59,8 +59,7 @@ const GameHeader = ({ data, gameNameBefore }) => {
         } else {
             setWatched(false)
         }
-        // setWatched(userData.data.watchedGamesId.findIndex(el => el === id));
-    }, [userDataContext])
+    }, [userDataContext, data])
 
     const [watched, setWatched] = useState(false);
     return (

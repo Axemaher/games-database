@@ -36,12 +36,12 @@ const Authentication = ({ visibility }) => {
                         {authMetod === 'login' ?
                             <AuthForm
                                 authBtnLabel={'LOG IN'}
-                                loginMethod={true}
+                                login={true}
                                 authOptions={true}
                             /> :
                             <AuthForm
                                 authBtnLabel={'REGISTER'}
-                                registerMethod={true}
+                                register={true}
                                 authOptions={false}
                             />
                         }

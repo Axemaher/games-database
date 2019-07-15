@@ -1,10 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import fbase from '../../js/firebase';
 import firebase from 'firebase';
+import fbase from '../../js/firebase';
 import { UserDataContext } from '../../js/context';
 
-const AuthForm = ({ authOptions, authBtnLabel, loginMethod, registerMethod }) => {
+const AuthForm = ({ authOptions, authBtnLabel, login, register }) => {
 
     const [inputs, setInputs] = useState({
         email: "",
@@ -24,52 +24,48 @@ const AuthForm = ({ authOptions, authBtnLabel, loginMethod, registerMethod }) =>
         })
     }
 
-    // checking if uid is in databse
-    const uidExist = uid => {
-        firebase.database().ref('/users/' + uid)
-            .once('value')
-            .then(function (result) {
-                return result.val() === null ? false : true;
-            })
-    }
-
-    // 
     const setUserDataHandler = data => {
 
         const { displayName, email, uid } = data;
 
-        // getting user data from database to app context
         firebase.database().ref('/users/' + uid)
             .once('value')
-            .then(function (result) {
-                setUserData({
-                    logged: true,
-                    data: {
-                        displayName,
-                        email,
-                        uid,
-                        watchedGamesId: result.val().watchedGamesId
-                    }
-                });
+            .then(result => {
+
+                const newUserData = {
+                    displayName,
+                    email,
+                    uid,
+                    watchedGamesId: ['']
+                }
+
+                if (result.val() === null) {
+                    firebase.database().ref('users/' + uid).set(newUserData)
+                        .then(() => {
+                            setUserData({
+                                logged: true,
+                                data: newUserData
+                            });
+                        });
+                } else {
+                    setUserData({
+                        logged: true,
+                        data: {
+                            displayName,
+                            email,
+                            uid,
+                            watchedGamesId: result.val().watchedGamesId
+                        }
+                    });
+                }
             })
-
-        // if user is not in database add new user to database
-        if (uidExist(uid)) {
-            firebase.database().ref('users/' + uid).set({
-                displayName,
-                email,
-                uid,
-                watchedGamesId: ['asn', 'ddd']
-            });
-        }
-
     }
 
 
     // email and password login/register
     const handleSubmit = e => {
         e.preventDefault();
-        if (registerMethod) {
+        if (register) {
             firebase.auth().createUserWithEmailAndPassword(inputs.email, inputs.password)
                 .then(result => {
                     modalHandler(true, false, "logged in successfully")
@@ -77,23 +73,25 @@ const AuthForm = ({ authOptions, authBtnLabel, loginMethod, registerMethod }) =>
                     setUserDataHandler(result.user)
                 })
                 .catch(error => {
+                    console.log(error)
                     modalHandler(true, true, "the email address is already in use by another account")
                 });
         }
-        if (loginMethod) {
+        if (login) {
             firebase.auth().signInWithEmailAndPassword(inputs.email, inputs.password)
                 .then(result => {
                     modalHandler(true, false, "logged in successfully")
                     setAuthModal(false)
                     setUserDataHandler(result.user)
                 }).catch(error => {
+                    console.log(error)
                     modalHandler(true, true, "the password is invalid or the user does not exist")
                 });
         }
 
     }
 
-    // social login
+    // social login switch
     const socialLogin = social => {
         let provider = null;
         switch (social) {
@@ -110,11 +108,12 @@ const AuthForm = ({ authOptions, authBtnLabel, loginMethod, registerMethod }) =>
         firebase.auth().signInWithRedirect(provider)
             .then(() => {
                 return firebase.auth().getRedirectResult();
-            }).catch(error => {
+            }).catch(() => {
                 modalHandler(true, true, "authentication error")
             });
     }
 
+    // getting redirect result for authentication
     useEffect(() => {
         firebase.auth().getRedirectResult()
             .then(result => {
