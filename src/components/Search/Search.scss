@@ -37,13 +37,15 @@
     color: red;
 	position: absolute;
 }
+
 .submit-btn {
 	border: none;
 	background-color: transparent;
+	cursor: pointer;
 	position: absolute;
 	font-size: 30px;
     right: 3px;
-    top: 6px;
+    top: 5px;
     position: absolute;
     color: $gray;
 }
@@ -59,23 +61,8 @@
 		z-index: 2;
 	}
 }
-.filter-btn{
-	border: none;
-	padding: 0 20px;
-	display: flex;
-	height: 30px;
-	align-items: center;
-	color: white;
-	background-color: $secondary-font;
-	
-}
-.filter-close-btn{
-	font-size: 30px;
-	margin-left: 20px;
-	border: none;
-	background-color: transparent;
-	color: red;
-}
+
+
 .filter-container{
   display: none;
 }
@@ -204,11 +191,6 @@ input[type=checkbox]:checked + label > .v-sign:after {
 	opacity: 1;
 }
 
-
-.show-more-btn{
-	cursor: pointer;
-	color: $gray;
-}
 
 
 // https://codepen.io/evgen_perelomov/pen/JEKNVr

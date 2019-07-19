@@ -27,7 +27,7 @@ const GameHeader = ({ data, gameNameBefore }) => {
             let watchedGamesCopy = watchedGamesId;
             const index = watchedGamesCopy.findIndex(el => el === id);
             if (index === -1) {
-                if (watchedGamesCopy.length > 50) {
+                if (watchedGamesCopy.length > 10) {
                     setInfoModal({
                         visible: true,
                         error: true,

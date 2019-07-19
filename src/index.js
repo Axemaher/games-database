@@ -22,7 +22,9 @@ import {
     faSignInAlt,
     faUserCog,
     faAngleDown,
-    faEye
+    faEye,
+    faFilter,
+    faSignOutAlt
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -47,7 +49,9 @@ library.add(
     faUserCog,
     faGithub,
     faAngleDown,
-    faEye
+    faEye,
+    faFilter,
+    faSignOutAlt
 )
 
 

@@ -108,20 +108,25 @@ $font: white;
   width: 100%;
 }
 
-.auth-btn{
-  border: none;
-  color: $font;
-  cursor: pointer;
-  background-color: $header-background;
-  font-size: 12px;
+.btn--auth{
   margin: 20px auto;
-  padding: 10px 10px;
   width: 120px;
-  transition: background-color .3s;
-  &:hover{
-    background-color: $button-active;
-  }
+  position: relative;
 }
+
+.input-row{
+  position: relative;
+}
+
+.form-auth-error{
+  bottom: -15px;
+  color: red;
+  font-size: 10px;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+}
+
 .submit-icon{
   margin-right: 6px;
 }

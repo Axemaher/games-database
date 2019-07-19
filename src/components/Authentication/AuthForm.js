@@ -10,6 +10,8 @@ const AuthForm = ({ authOptions, authBtnLabel, login, register }) => {
         email: "",
         password: ""
     });
+    const [error, setError] = useState(false);
+
 
     const handleInputChange = (event) => {
         event.persist();
@@ -74,7 +76,7 @@ const AuthForm = ({ authOptions, authBtnLabel, login, register }) => {
                 })
                 .catch(error => {
                     console.log(error)
-                    modalHandler(true, true, "the email address is already in use by another account")
+                    setError("the email address is already in use by another account")
                 });
         }
         if (login) {
@@ -85,7 +87,7 @@ const AuthForm = ({ authOptions, authBtnLabel, login, register }) => {
                     setUserDataHandler(result.user)
                 }).catch(error => {
                     console.log(error)
-                    modalHandler(true, true, "the password is invalid or the user does not exist")
+                    setError("the password is invalid or the user does not exist")
                 });
         }
 
@@ -160,8 +162,9 @@ const AuthForm = ({ authOptions, authBtnLabel, login, register }) => {
                         minLength="6"
                         required
                     />
+                    {error && <span className="form-auth-error">{error}</span>}
                 </div>
-                <button type="submit" className="auth-btn">
+                <button type="submit" className="btn btn--auth">
                     <FontAwesomeIcon className="submit-icon" icon={['fas', 'sign-in-alt']} />{authBtnLabel}</button>
             </form>
             <section className="social-auth-section">

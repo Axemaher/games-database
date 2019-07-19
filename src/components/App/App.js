@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './App.scss';
+import '../../globalStyles/button.scss';
 import Home from '../Home/Home';
 import Game from "../Game/Game";
 import Search from '../Search/Search';

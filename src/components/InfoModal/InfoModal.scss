@@ -13,7 +13,7 @@ $font: white;
 
 .info-modal {
   position: fixed;
-  z-index: 2;
+  z-index: 4;
   right: 0;
   top: 40px;
   padding: 15px;
@@ -22,7 +22,7 @@ $font: white;
   align-items: center;
   font-size: 16px;
   background-color: white;
-
+  box-shadow: 0px 11px 15px -7px rgba(0,0,0,0.2), 0px 24px 38px 3px rgba(0,0,0,0.14), 0px 9px 46px 8px rgba(0,0,0,0.12);
 }
 .info-modal-error{
     color: red;

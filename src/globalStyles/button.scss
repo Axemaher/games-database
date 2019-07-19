@@ -1,0 +1,37 @@
+$btn-background: #1cafb5;
+$btn-hover-background: rgb(0, 193, 201);
+
+
+.btn{
+    border: none;
+    border-radius: 2px;
+    display: inline-block;
+    padding: 8px 16px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #fff;
+    background-color: $btn-background;
+    text-align: center;
+    letter-spacing: .5px;
+	transition: background-color .3s ease-out;
+	&:hover{
+		background-color: $btn-hover-background;
+	}
+	.btn__ico{
+		margin-right: 10px;
+	}
+}
+
+.btn-only-ico{
+	background-color: transparent;
+    border: none;
+    color: red;
+    cursor: pointer;
+    font-size: 30px;
+    margin: 3px 0 0 5px;
+    margin-top: 3px;
+    padding: 5px 10px;
+    &:hover{
+		background-color: transparent;
+	}
+}

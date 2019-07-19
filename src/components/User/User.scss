@@ -1,0 +1,72 @@
+@import "../variables.scss";
+
+.user-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn--sign-out{
+    font-size: 11px;
+}
+
+.result-label{
+    font-size: 15px;
+    padding-top: 30px;
+}
+.results-list{
+    list-style: none;
+}
+.result__cover{
+    padding: 2px;
+    width: 40px;
+    grid-area: cover;
+}
+.result__game-name{
+    grid-area: game-name;
+    margin-left: 2px;
+    font-size: 14px;
+    font-weight: bold;
+    color: $primary-font;
+    align-items: center;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+}
+.platform-list{
+    margin-left: 2px;
+    grid-area: platforms;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.platform-label{
+    height: 20px;
+    margin-right: 5px;
+    font-size: 10px;
+}
+.rating{
+    font-size: 12px;
+    grid-area: rating;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.result{
+    margin-top: 10px;
+    min-height: 40px;
+    border-bottom: 1px dashed $gray;
+    display: grid;
+    grid-template-columns: 40px auto 75px;
+     grid-template-rows: auto;
+     grid-template-areas: 
+       "cover game-name rating"
+       "cover platforms platforms";
+}
+@media screen and (max-width: 1200px) {
+    .results{
+        width:100%;
+        padding: 0 5px;
+    }
+}

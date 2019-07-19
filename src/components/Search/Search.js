@@ -138,12 +138,12 @@ const Search = props => {
                     </div>
                     <div className="filter-header">
                         {!filters ?
-                            <button type="button" className="filter-btn" onClick={() => setFilters(true)}>Show filters</button> :
-                            <button type="button" className="filter-btn" onClick={handleSubmit}>Show results</button>}
+                            <button type="button" className="btn" onClick={() => setFilters(true)}><FontAwesomeIcon className="btn__ico" icon="filter" />Show filters</button> :
+                            <button type="button" className="btn" onClick={handleSubmit}><FontAwesomeIcon className="btn__ico" icon="search" />Show results</button>}
 
 
                         {filters &&
-                            <button type="button" className="filter-close-btn" onClick={() => setFilters(false)}>
+                            <button type="button" className="btn-only-ico" onClick={() => setFilters(false)}>
                                 <FontAwesomeIcon icon="times" />
                             </button>}
                     </div>
