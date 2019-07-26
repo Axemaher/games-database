@@ -40,7 +40,7 @@ const User = () => {
     }
 
     return (
-        <main className="main">
+        <main className="main main-user">
             <header className="user-header">
                 <span>{email}</span>
                 <button className="btn btn--sign-out" onClick={handleSignOut}> <FontAwesomeIcon className="btn__ico" icon="sign-out-alt" />sign out</button>

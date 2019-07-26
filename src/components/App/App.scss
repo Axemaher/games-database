@@ -1,47 +1,54 @@
 @import "../variables.scss";
-.header {
-    width: 1400px;
-    @media screen and (max-width: 1400px) {
-      width: 100%;
-    }
+  .header {
+    background-color: $secondary-font;
+    color: white;
+    margin-bottom: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
   .logo{
     font-size: 16px;
   }
   .nav{
+    width: 100%;
+    max-width: 1400px;
     display: flex;
     justify-content: space-between;
+    @media screen and (max-width: 1400px) {
+      width: 100%;
+    }
   }
-.nav-group{
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  list-style: none;
+  .nav-group{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    list-style: none;
+    }
+  .home-btn{
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
   }
-.home-btn{
-  color: $primary-font;
-  font-weight: bold;
-  text-decoration: none;
-}
-.nav-element{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.nav-btn{
-  padding: 10px;
-  font-size: 15px;
-  text-decoration: none;
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
-  color: $primary-font;
-}
-.nav-btn-auth-ico{
-  font-size: 15px;
-  text-decoration: none;
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
-  color: $primary-font;
-}
+  .nav-element{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .nav-btn{
+    padding: 10px;
+    font-size: 15px;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    color: white;
+  }
+  .nav-btn-auth-ico{
+    font-size: 15px;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    color: white;
+  }
