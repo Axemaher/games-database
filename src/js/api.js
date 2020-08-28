@@ -2,10 +2,8 @@ const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 const mainAdress = "https://api-v3.igdb.com/games";
 const pulseGroupsAdress = "https://api-v3.igdb.com/pulse_groups";
 const feedsAdress = "https://api-v3.igdb.com/feeds";
-const API_KEY = '0b05b1c911ee9a22cbadcbefe2184ab0';
+const API_KEY = '336bf2fb2774149a3ac9da80d4203951';
 
-// axemaher: 6e25c84bd2fd1f90934ea9083acd98d6
-// axemaher1: 0b05b1c911ee9a22cbadcbefe2184ab0
 
 const dateNow = Math.round((new Date()).getTime() / 1000);
 
