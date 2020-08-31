@@ -20,7 +20,6 @@ const User = () => {
         let dataCopy = watchedGamesId;
         dataCopy = dataCopy.filter(el => el !== "");
         dataCopy = dataCopy.join(', ');
-        console.log(dataCopy)
         axios({
             url, method, headers, data: `fields *, cover.*, platforms.*; where id = (${dataCopy});`
         })

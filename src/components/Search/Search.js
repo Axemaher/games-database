@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import './Search.scss';
 import { url, method, headers } from '../../js/api';
@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as filtersData from '../../js/filtersData';
 
 
-const Search = props => {
+const Search = () => {
 
     const [searchValue, setSearchValue] = useState("");
     const [error, setError] = useState(false);

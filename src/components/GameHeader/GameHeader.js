@@ -17,7 +17,7 @@ const GameHeader = ({ data, gameNameBefore }) => {
 
 
     const userDataContext = useContext(UserDataContext)
-    const { userData, setAuthModal, setUserData, setInfoModal } = userDataContext;
+    const { userData, setAuthModal, setInfoModal } = userDataContext;
 
     const handleWatch = () => {
         if (!userData.logged) {

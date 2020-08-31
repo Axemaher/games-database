@@ -5,10 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 
 const GameNav = ({ dataVisibles, pageId }) => {
-    console.log(dataVisibles)
 
-    const { tabInfo, tabDesc, tabVideo, tabScreen, tabArt, tabPulses } = tabsInformations;
-    const { informations, description, videos, screenshots, artworks, pulses } = dataVisibles;
+    const { tabInfo, tabDesc, tabVideo, tabScreen, tabArt } = tabsInformations;
+    const { informations, description, videos, screenshots, artworks } = dataVisibles;
 
     let navElements = [
         informations && tabInfo,

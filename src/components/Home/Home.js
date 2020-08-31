@@ -23,7 +23,6 @@ const Home = () => {
         })
             /// HEADER DATA
             .then(response => {
-                console.log(response.data)
                 let headerData = response.data[Math.floor((Math.random() * response.data.length) + 0)];
                 const { id, cover, name, screenshots, release_dates, involved_companies, websites, rating } = headerData;
                 headerData = {
@@ -76,7 +75,6 @@ const Home = () => {
         })
             /// ARTICLES DATA
             .then(response => {
-                console.log(response.data);
                 const articlesData = response.data.map(function (el) {
                     const { created_at } = el;
                     const { author, image, title, summary, website, id } = el.pulse;

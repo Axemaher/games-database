@@ -4,12 +4,6 @@ $button-active: rgb(0, 193, 201);
 $inputs: rgb(142,149,159);
 $font: white;
 
-.info-modal-container{
-
-    @media screen and (max-width: 1400px) {
-      width: 100%;
-    }
-}
 
 .info-modal {
   position: fixed;

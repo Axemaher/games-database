@@ -10,11 +10,8 @@ import Articles from '../Articles/Articles';
 import { tabsInformations } from '../../js/utils';
 import Loader from '../Loader/Loader';
 import moment from 'moment';
-import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
+import { Element } from 'react-scroll';
 
-
-
-// import gameData from '../../js/gameData';
 
 import { url, urlPulses, method, headers, gameById, pulses } from '../../js/api';
 
@@ -101,7 +98,6 @@ const Game = ({ match }) => {
             })
                 .then(response => {
                     const pulsesData = response.data.map(function (el) {
-                        console.log(response.data)
                         const { created_at, id } = el;
                         const { website, author, title, summary } = el.pulses[0];
                         const filteredImages = el.pulses.filter(el => el.image !== undefined);

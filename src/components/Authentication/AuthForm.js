@@ -106,11 +106,13 @@ const AuthForm = ({ authOptions, authBtnLabel, login, register }) => {
             case 'github':
                 provider = new firebase.auth.GithubAuthProvider();
                 break;
+            default: return;
         }
         firebase.auth().signInWithRedirect(provider)
             .then(() => {
                 return firebase.auth().getRedirectResult();
-            }).catch(() => {
+            }).catch((e) => {
+                console.log(e)
                 modalHandler(true, true, "authentication error")
             });
     }
