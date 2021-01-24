@@ -1,5 +1,5 @@
 # Games database
-[live](http://cryptic-brook-43913.herokuapp.com/)
+[live](https://mb2-games-database.netlify.app/)
 
 ## Technologies
 * HTML
