@@ -18,6 +18,7 @@ const Home = () => {
 
 
     useEffect(() => {
+
         axios({
             url, method, headers, data: topReleases
         })
@@ -49,7 +50,9 @@ const Home = () => {
                 })
                 setDataTopReleased(topRelesedData)
             })
-            .catch(err => console.error(err));
+            .catch(err => {
+                console.error(err.response.status)
+            });
         axios({
             url, method, headers, data: popular
         })
@@ -68,31 +71,32 @@ const Home = () => {
                 })
                 setDataPopular(popularData)
             })
-            .catch(err => console.error(err));
+            .catch(err => console.log(err.response));
 
-        axios({
-            url: urlFeed, method, headers, data: feed
-        })
-            /// ARTICLES DATA
-            .then(response => {
-                const articlesData = response.data.map(function (el) {
-                    const { created_at } = el;
-                    const { author, image, title, summary, website, id } = el.pulse;
-                    return {
-                        created: moment().calendar(moment.unix(created_at)),
-                        url: website.url,
-                        author,
-                        image,
-                        title,
-                        summary,
-                        id
-                    }
-                })
-                setDataArticles(articlesData)
-            })
-            .catch(err => {
-                console.error(err);
-            });
+        // endpoint deleted in v4
+        // axios({
+        //     url: urlFeed, method, headers, data: feed
+        // })
+        //     /// ARTICLES DATA
+        //     .then(response => {
+        //         const articlesData = response.data.map(function (el) {
+        //             const { created_at } = el;
+        //             const { author, image, title, summary, website, id } = el.pulse;
+        //             return {
+        //                 created: moment().calendar(moment.unix(created_at)),
+        //                 url: website.url,
+        //                 author,
+        //                 image,
+        //                 title,
+        //                 summary,
+        //                 id
+        //             }
+        //         })
+        //         setDataArticles(articlesData)
+        //     })
+        //     .catch(err => {
+        //         console.error(err);
+        //     });
     }, [])
 
     return (

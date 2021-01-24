@@ -11,6 +11,9 @@ import { UserDataContext } from '../../js/context';
 import User from '../User/User';
 import InfoModal from '../InfoModal/InfoModal';
 import firebase from 'firebase';
+import axios from 'axios';
+import { url, method, headers, apiCheck, getToken } from '../../js/api';
+
 
 const initialUserData = {
   logged: false,
@@ -61,6 +64,19 @@ const App = () => {
           })
       }
     });
+
+    axios({
+      url, method, headers, data: apiCheck
+    })
+      .catch(err => {
+        if (err.response.status === 403) {
+          axios.post(getToken)
+            .then(res => {
+              localStorage.setItem('access_token', res.data.access_token)
+            }).catch(err => console.log(err))
+        }
+      });
+
   }, [])
 
 
@@ -86,6 +102,7 @@ const App = () => {
     <Provider value={{ userData, setUserData, setAuthModal, setInfoModal }}>
       <Router>
         <>
+          <p className={'api-info'}>API V4 introduced restrictive request rate limits. If the page does not load, please try again later.</p>
           <header className="header">
             <nav className="nav">
               <ul className="nav-group">

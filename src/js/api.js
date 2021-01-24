@@ -1,8 +1,11 @@
 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-const mainAdress = "https://api-v3.igdb.com/games";
-const pulseGroupsAdress = "https://api-v3.igdb.com/pulse_groups";
-const feedsAdress = "https://api-v3.igdb.com/feeds";
-const API_KEY = '336bf2fb2774149a3ac9da80d4203951';
+const mainAdress = "https://api.igdb.com/v4/games";
+const pulseGroupsAdress = "https://api.igdb.com/v4/pulse_groups";
+const feedsAdress = "https://api.igdb.com/v4/feeds";
+
+const clientID = 'm0dkaa0ueo6i9zdg6mbjb7v5gszgvx';
+const clientSecret = 'vl3g86woz1v95r8cpv2s6h9rva0enh';
+const access_token = localStorage.getItem('access_token');
 
 
 const dateNow = Math.round((new Date()).getTime() / 1000);
@@ -14,8 +17,13 @@ export const urlPulses = `${proxyUrl}${pulseGroupsAdress}`;
 export const method = 'POST';
 export const headers = {
     'Accept': 'application/json',
-    'user-key': API_KEY,
+    'Client-ID': clientID,
+    'Authorization': `Bearer ${access_token}`,
 };
+
+
+export const getToken = `https://id.twitch.tv/oauth2/token?client_id=${clientID}&client_secret=${clientSecret}&grant_type=client_credentials`;
+export const apiCheck = ``;
 
 export const topReleases = `limit 8;
 fields cover.image_id, name, screenshots.image_id, rating, release_dates.human, websites.category, websites.url, involved_companies.company.name, themes.name;

@@ -92,28 +92,29 @@ const Game = ({ match }) => {
                 })
                 .catch(err => console.error(err));
 
+            // endpoint deleted in v4
             // PULSES
-            axios({
-                url: urlPulses, method, headers, data: `${pulses} where game = ${match.params.id} & pulses.image != null;`
-            })
-                .then(response => {
-                    const pulsesData = response.data.map(function (el) {
-                        const { created_at, id } = el;
-                        const { website, author, title, summary } = el.pulses[0];
-                        const filteredImages = el.pulses.filter(el => el.image !== undefined);
-                        return {
-                            created: moment().calendar(moment.unix(created_at)),
-                            url: website.url,
-                            author,
-                            image: filteredImages[0].image,
-                            title,
-                            summary,
-                            id
-                        }
-                    })
-                    setDataPulses(pulsesData)
-                })
-                .catch(err => console.error(err));
+            // axios({
+            //     url: urlPulses, method, headers, data: `${pulses} where game = ${match.params.id} & pulses.image != null;`
+            // })
+            //     .then(response => {
+            //         const pulsesData = response.data.map(function (el) {
+            //             const { created_at, id } = el;
+            //             const { website, author, title, summary } = el.pulses[0];
+            //             const filteredImages = el.pulses.filter(el => el.image !== undefined);
+            //             return {
+            //                 created: moment().calendar(moment.unix(created_at)),
+            //                 url: website.url,
+            //                 author,
+            //                 image: filteredImages[0].image,
+            //                 title,
+            //                 summary,
+            //                 id
+            //             }
+            //         })
+            //         setDataPulses(pulsesData)
+            //     })
+            //     .catch(err => console.error(err));
         }
 
         getData();
